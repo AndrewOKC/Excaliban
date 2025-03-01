@@ -5,11 +5,15 @@ import { initializeBoards, saveBoard } from './storage.js';
 import { setupDragAndDrop } from './drag-drop.js';
 import { registerServiceWorker } from './pwa.js';
 import { showNotification } from './utils.js';
+import { initViewportHeight } from './viewport-utils.js';
 import * as TaskManager from './task-manager.js';
 import * as BoardManager from './board-manager.js';
 
 // Register service worker for PWA functionality
 registerServiceWorker();
+
+// Initialize viewport height for mobile devices
+initViewportHeight();
 
 document.addEventListener("DOMContentLoaded", () => {
     // DOM elements
