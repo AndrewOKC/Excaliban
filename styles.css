@@ -53,9 +53,16 @@ h1 {
     display: flex;
     gap: 20px;
     overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
     padding-bottom: 20px;
     height: calc(100vh - 200px);
     max-height: calc(100vh - 200px);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.board::-webkit-scrollbar {
+    display: none;
 }
 
 /* Column styles */
@@ -123,9 +130,16 @@ h1 {
     min-height: 100px;
     max-height: calc(100% - 125px);
     overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.task-list::-webkit-scrollbar {
+    display: none;
 }
 
 /* Task styles */
@@ -302,7 +316,7 @@ h1 {
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 .notification {
