@@ -114,8 +114,8 @@ h1 {
     justify-content: center;
     position: absolute;
     right: 10px; /* Position 10px from the right edge */
-    top: 50%;
-    transform: translateY(-50%);
+    top: 30%;
+    /* transform: translateY(-50%); */
 }
 
 .delete-column:hover {
