@@ -316,7 +316,6 @@ h1 {
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
-    overflow: hidden;
 }
 
 .notification {
@@ -340,8 +339,14 @@ h1 {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 /* Button styles */
 button {
@@ -459,7 +464,8 @@ button:active {
     animation: fadeIn 0.2s ease-out;
 }
 
-.color-option, .color-option-small {
+.color-option,
+.color-option-small {
     width: 30px;
     height: 30px;
     border-radius: 4px;
@@ -468,7 +474,8 @@ button:active {
     transition: transform 0.1s, border-color 0.1s;
 }
 
-.color-option:hover, .color-option-small:hover {
+.color-option:hover,
+.color-option-small:hover {
     transform: scale(1.1);
     border-color: #f5f5f7;
 }
@@ -549,7 +556,7 @@ button:active {
     margin-bottom: 8px;
 }
 
-.form-group input, 
+.form-group input,
 .form-group textarea,
 .form-group select {
     width: 100%;
@@ -561,7 +568,7 @@ button:active {
     padding: 10px;
 }
 
-.form-group input:focus, 
+.form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     border-color: #6965db;
@@ -587,9 +594,15 @@ button:active {
 
 /* Highlight animation for search results */
 @keyframes highlight {
-    0% { box-shadow: 0 0 0 2px #6965db; }
-    50% { box-shadow: 0 0 0 4px #6965db; }
-    100% { box-shadow: 3px 3px 0px rgba(105, 101, 219, 0.2); }
+    0% {
+        box-shadow: 0 0 0 2px #6965db;
+    }
+    50% {
+        box-shadow: 0 0 0 4px #6965db;
+    }
+    100% {
+        box-shadow: 3px 3px 0px rgba(105, 101, 219, 0.2);
+    }
 }
 
 .task.highlight {
@@ -601,7 +614,7 @@ button:active {
     h1 {
         font-size: 2.5rem;
     }
-    
+
     .controls {
         gap: 20px;
     }
@@ -613,7 +626,7 @@ button:active {
         align-items: flex-start;
         gap: 15px;
     }
-    
+
     h1 {
         margin-right: 0;
         margin-bottom: 10px;
@@ -626,21 +639,21 @@ button:active {
         gap: 15px;
         width: 100%;
     }
-    
+
     .controls-left,
     .controls-center,
     .controls-right {
         width: 100%;
     }
-    
+
     .search-container {
         width: 100%;
     }
-    
+
     .board-selector {
         width: 100%;
     }
-    
+
     #board-dropdown {
         width: calc(100% - 110px);
     }
@@ -648,18 +661,18 @@ button:active {
     .column {
         min-width: 250px;
     }
-    
+
     .board-controls {
         width: 100%;
         overflow-x: auto;
         padding-bottom: 5px;
     }
-    
+
     .modal-content {
         width: 95%;
         padding: 15px;
     }
-    
+
     .color-picker {
         position: fixed;
         bottom: 20px;
@@ -667,7 +680,7 @@ button:active {
         transform: translateX(-50%);
         top: auto !important;
     }
-    
+
     .board {
         height: calc(100vh - 280px);
         max-height: calc(100vh - 280px);

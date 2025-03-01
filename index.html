@@ -1,249 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			http-equiv="Cache-Control"
-			content="no-cache, no-store, must-revalidate"
-		/>
-		<meta http-equiv="Pragma" content="no-cache" />
-		<meta http-equiv="Expires" content="0" />
-		<title>Excaliban - The People's Kanban</title>
-		<meta
-			name="description"
-			content="A simple, beautiful Kanban board with a handwritten style. Organize your tasks with ease."
-		/>
-		<link rel="stylesheet" href="styles.css" />
-		<link rel="icon" href="favicon.ico" type="image/x-icon" />
-		<link
-			rel="icon"
-			href="icons/48x48.png"
-			type="image/png"
-			sizes="48x48"
-		/>
-		<link
-			rel="icon"
-			href="icons/64x64.png"
-			type="image/png"
-			sizes="64x64"
-		/>
-		<link rel="manifest" href="manifest.json" />
-		<meta name="theme-color" content="#121212" />
-	</head>
-	<body>
-		<div class="app-container">
-			<header>
-				<h1>Excaliban</h1>
-				<div class="controls">
-					<div class="controls-left">
-						<div class="search-container">
-							<input
-								type="text"
-								id="search-tasks"
-								placeholder="Search..."
-								aria-label="Search tasks"
-							/>
-						</div>
-					</div>
-					<div class="controls-center">
-						<div class="board-selector">
-							<select
-								id="board-dropdown"
-								aria-label="Select board"
-							></select>
-							<div class="board-actions">
-								<button
-									id="new-board"
-									title="Create new board"
-									aria-label="Create new board"
-								>
-									+
-								</button>
-								<button
-									id="rename-board"
-									title="Rename current board"
-									aria-label="Rename current board"
-								>
-									✏️
-								</button>
-								<button
-									id="delete-board"
-									title="Delete current board"
-									aria-label="Delete current board"
-								>
-									🗑️
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="controls-right">
-						<div class="board-controls">
-							<button id="add-column" aria-label="Add column">
-								Add Column
-							</button>
-							<button id="clear-board" aria-label="Clear board">
-								Clear
-							</button>
-							<button id="export-board" aria-label="Export board">
-								Export
-							</button>
-							<button id="import-board" aria-label="Import board">
-								Import
-							</button>
-							<button
-								id="github"
-								aria-label="View on GitHub"
-								onclick="window.location.href='https://github.com/AndrewOKC/Excaliban';"
-							>
-								<svg
-									height="20"
-									viewBox="0 0 24 24"
-									fill="white"
-									width="20"
-								>
-									<path
-										d="M12.5.75C6.146.75 1 5.896 1 12.25c0 5.089 3.292 9.387 7.863 10.91.575.101.79-.244.79-.546 0-.273-.014-1.178-.014-2.142-2.889.532-3.636-.704-3.866-1.35-.13-.331-.69-1.352-1.18-1.625-.402-.216-.977-.748-.014-.762.906-.014 1.553.834 1.769 1.179 1.035 1.74 2.688 1.25 3.349.948.1-.747.402-1.25.733-1.538-2.559-.287-5.232-1.279-5.232-5.678 0-1.25.445-2.285 1.178-3.09-.115-.288-.517-1.467.115-3.048 0 0 .963-.302 3.163 1.179.92-.259 1.897-.388 2.875-.388.977 0 1.955.13 2.875.388 2.2-1.495 3.162-1.179 3.162-1.179.633 1.581.23 2.76.115 3.048.733.805 1.179 1.825 1.179 3.09 0 4.413-2.688 5.39-5.247 5.678.417.36.776 1.05.776 2.128 0 1.538-.014 2.774-.014 3.162 0 .302.216.662.79.547C20.709 21.637 24 17.324 24 12.25 24 5.896 18.854.75 12.5.75Z"
-									></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-				</div>
-				<div id="notification" class="notification" role="alert"></div>
-			</header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Cache-Control"
+            content="no-cache, no-store, must-revalidate"
+        />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <title>Excaliban - The People's Kanban</title>
+        <meta
+            name="description"
+            content="A simple, beautiful Kanban board with a handwritten style. Organize your tasks with ease."
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link
+            rel="icon"
+            href="icons/48x48.png"
+            type="image/png"
+            sizes="48x48"
+        />
+        <link
+            rel="icon"
+            href="icons/64x64.png"
+            type="image/png"
+            sizes="64x64"
+        />
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="#121212" />
+    </head>
+    <body>
+        <div class="app-container">
+            <header>
+                <h1>Excaliban</h1>
+                <div class="controls">
+                    <div class="controls-left">
+                        <div class="search-container">
+                            <input
+                                type="text"
+                                id="search-tasks"
+                                placeholder="Search..."
+                                aria-label="Search tasks"
+                            />
+                        </div>
+                    </div>
+                    <div class="controls-center">
+                        <div class="board-selector">
+                            <select
+                                id="board-dropdown"
+                                aria-label="Select board"
+                            ></select>
+                            <div class="board-actions">
+                                <button
+                                    id="new-board"
+                                    title="Create new board"
+                                    aria-label="Create new board"
+                                >
+                                    +
+                                </button>
+                                <button
+                                    id="rename-board"
+                                    title="Rename current board"
+                                    aria-label="Rename current board"
+                                >
+                                    ✏️
+                                </button>
+                                <button
+                                    id="delete-board"
+                                    title="Delete current board"
+                                    aria-label="Delete current board"
+                                >
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls-right">
+                        <div class="board-controls">
+                            <button id="add-column" aria-label="Add column">
+                                Add Column
+                            </button>
+                            <button id="clear-board" aria-label="Clear board">
+                                Clear
+                            </button>
+                            <button id="export-board" aria-label="Export board">
+                                Export
+                            </button>
+                            <button id="import-board" aria-label="Import board">
+                                Import
+                            </button>
+                            <button
+                                id="github"
+                                aria-label="View on GitHub"
+                                onclick="window.location.href='https://github.com/AndrewOKC/Excaliban';"
+                            >
+                                <svg
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="white"
+                                    width="20"
+                                >
+                                    <path
+                                        d="M12.5.75C6.146.75 1 5.896 1 12.25c0 5.089 3.292 9.387 7.863 10.91.575.101.79-.244.79-.546 0-.273-.014-1.178-.014-2.142-2.889.532-3.636-.704-3.866-1.35-.13-.331-.69-1.352-1.18-1.625-.402-.216-.977-.748-.014-.762.906-.014 1.553.834 1.769 1.179 1.035 1.74 2.688 1.25 3.349.948.1-.747.402-1.25.733-1.538-2.559-.287-5.232-1.279-5.232-5.678 0-1.25.445-2.285 1.178-3.09-.115-.288-.517-1.467.115-3.048 0 0 .963-.302 3.163 1.179.92-.259 1.897-.388 2.875-.388.977 0 1.955.13 2.875.388 2.2-1.495 3.162-1.179 3.162-1.179.633 1.581.23 2.76.115 3.048.733.805 1.179 1.825 1.179 3.09 0 4.413-2.688 5.39-5.247 5.678.417.36.776 1.05.776 2.128 0 1.538-.014 2.774-.014 3.162 0 .302.216.662.79.547C20.709 21.637 24 17.324 24 12.25 24 5.896 18.854.75 12.5.75Z"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="notification" class="notification" role="alert"></div>
+            </header>
 
-			<main id="board" class="board">
-				<!-- Columns will be added here dynamically -->
-			</main>
-		</div>
+            <main id="board" class="board">
+                <!-- Columns will be added here dynamically -->
+            </main>
+        </div>
 
-		<!-- Color Picker Popup -->
-		<div id="color-picker" class="color-picker">
-			<div class="color-option" data-color="#363c4a"></div>
-			<!-- Default color -->
-			<div class="color-option" data-color="#f28275"></div>
-			<!-- Red color -->
-			<div class="color-option" data-color="#518b46"></div>
-			<!-- Green color -->
-			<div class="color-option" data-color="#6a95d9"></div>
-			<!-- Blue color -->
-			<div class="color-option" data-color="#a26104"></div>
-			<!-- Brown color -->
-			<div class="color-option" data-color="#cc8beb"></div>
-			<!-- Purple color -->
-		</div>
+        <!-- Color Picker Popup -->
+        <div id="color-picker" class="color-picker">
+            <div class="color-option" data-color="#363c4a"></div>
+            <div class="color-option" data-color="#f28275"></div>
+            <div class="color-option" data-color="#518b46"></div>
+            <div class="color-option" data-color="#6a95d9"></div>
+            <div class="color-option" data-color="#a26104"></div>
+            <div class="color-option" data-color="#cc8beb"></div>
+        </div>
 
-		<!-- Templates -->
-		<template id="column-template">
-			<div class="column">
-				<div class="column-header">
-					<h2 class="column-title" contenteditable="true">
-						New Column
-					</h2>
-					<div class="column-controls">
-						<button class="delete-column">×</button>
-					</div>
-				</div>
-				<div class="task-list"></div>
-				<button class="add-task">+ Add Task</button>
-			</div>
-		</template>
+        <!-- Templates -->
+        <template id="column-template">
+            <div class="column">
+                <div class="column-header">
+                    <h2 class="column-title" contenteditable="true">
+                        New Column
+                    </h2>
+                    <div class="column-controls">
+                        <button class="delete-column">×</button>
+                    </div>
+                </div>
+                <div class="task-list"></div>
+                <button class="add-task">+ Add Task</button>
+            </div>
+        </template>
 
-		<template id="task-template">
-			<div
-				class="task"
-				draggable="true"
-				data-color="#363c4a"
-				data-priority="medium"
-			>
-				<div class="task-header">
-					<div class="task-priority" title="Task priority"></div>
-				</div>
-				<div class="task-content" contenteditable="true">New Task</div>
-				<div class="task-footer">
-					<div class="task-due-date"></div>
-				</div>
-				<button
-					class="edit-task"
-					title="Edit details"
-					aria-label="Edit task details"
-				>
-					✏️
-				</button>
-				<button
-					class="delete-task"
-					title="Delete task"
-					aria-label="Delete task"
-				>
-					×
-				</button>
-			</div>
-		</template>
+        <template id="task-template">
+            <div
+                class="task"
+                draggable="true"
+                data-color="#363c4a"
+                data-priority="medium"
+            >
+                <div class="task-header">
+                    <div class="task-priority" title="Task priority"></div>
+                </div>
+                <div class="task-content" contenteditable="true">New Task</div>
+                <div class="task-footer">
+                    <div class="task-due-date"></div>
+                </div>
+                <button
+                    class="edit-task"
+                    title="Edit details"
+                    aria-label="Edit task details"
+                >
+                    ✏️
+                </button>
+                <button
+                    class="delete-task"
+                    title="Delete task"
+                    aria-label="Delete task"
+                >
+                    ×
+                </button>
+            </div>
+        </template>
 
-		<!-- Task Edit Modal -->
-		<div
-			id="task-edit-modal"
-			class="modal"
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="modal-title"
-		>
-			<div class="modal-content">
-				<span class="modal-close" id="modal-close" aria-label="Close"
-					>&times;</span
-				>
-				<h3 id="modal-title">Edit Task</h3>
-				<form id="task-edit-form">
-					<div class="form-group">
-						<label for="edit-task-title">Title</label>
-						<input type="text" id="edit-task-title" required />
-					</div>
-					<div class="form-group">
-						<label for="edit-task-description">Description</label>
-						<textarea
-							id="edit-task-description"
-							rows="3"
-						></textarea>
-					</div>
-					<div class="form-group">
-						<label for="edit-task-priority">Priority</label>
-						<select id="edit-task-priority">
-							<option value="low">Low</option>
-							<option value="medium">Medium</option>
-							<option value="high">High</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="edit-task-due-date">Due Date</label>
-						<input type="date" id="edit-task-due-date" />
-					</div>
-					<div class="form-group">
-						<label for="edit-task-color">Color</label>
-						<div class="task-color-options">
-							<div class="color-option-small" data-color="#363c4a"></div>
-							<div class="color-option-small" data-color="#f28275"></div>
-							<div class="color-option-small" data-color="#518b46"></div>
-							<div class="color-option-small" data-color="#6a95d9"></div>
-							<div class="color-option-small" data-color="#a26104"></div>
-							<div class="color-option-small" data-color="#cc8beb"></div>
-							<input type="hidden" id="edit-task-color" value="#363c4a" />
-						</div>
-					</div>
-					<div class="form-actions">
-						<button
-							type="button"
-							id="cancel-edit"
-							class="secondary-button"
-						>
-							Cancel
-						</button>
-						<button type="submit" id="save-task-edit">Save</button>
-					</div>
-				</form>
-			</div>
-		</div>
+        <!-- Task Edit Modal -->
+        <div
+            id="task-edit-modal"
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
+            <div class="modal-content">
+                <span class="modal-close" id="modal-close" aria-label="Close"
+                    >&times;</span
+                >
+                <h3 id="modal-title">Edit Task</h3>
+                <form id="task-edit-form">
+                    <div class="form-group">
+                        <label for="edit-task-title">Title</label>
+                        <input type="text" id="edit-task-title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-task-description">Description</label>
+                        <textarea
+                            id="edit-task-description"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-task-priority">Priority</label>
+                        <select id="edit-task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-task-due-date">Due Date</label>
+                        <input type="date" id="edit-task-due-date" />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-task-color">Color</label>
+                        <div class="task-color-options">
+                            <div
+                                class="color-option-small"
+                                data-color="#363c4a"
+                            ></div>
+                            <div
+                                class="color-option-small"
+                                data-color="#f28275"
+                            ></div>
+                            <div
+                                class="color-option-small"
+                                data-color="#518b46"
+                            ></div>
+                            <div
+                                class="color-option-small"
+                                data-color="#6a95d9"
+                            ></div>
+                            <div
+                                class="color-option-small"
+                                data-color="#a26104"
+                            ></div>
+                            <div
+                                class="color-option-small"
+                                data-color="#cc8beb"
+                            ></div>
+                            <input
+                                type="hidden"
+                                id="edit-task-color"
+                                value="#363c4a"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button
+                            type="button"
+                            id="cancel-edit"
+                            class="secondary-button"
+                        >
+                            Cancel
+                        </button>
+                        <button type="submit" id="save-task-edit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-		<script src="script.js"></script>
-	</body>
+        <script src="script.js"></script>
+    </body>
 </html>
