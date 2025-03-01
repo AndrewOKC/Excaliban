@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set up drag and drop
     setupDragAndDrop(board, saveBoardWrapper);
 
-    // Event listeners
+    // Event listeners with Umami tracking
     addColumnBtn.addEventListener("click", () => {
         BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
     });
@@ -107,10 +107,29 @@ document.addEventListener("DOMContentLoaded", () => {
         BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
     });
     
-    exportBoardBtn.addEventListener("click", BoardManager.exportBoard);
+    exportBoardBtn.addEventListener("click", () => {
+        BoardManager.exportBoard();
+        // Track export action with Umami
+        if (window.umami) {
+            umami.track('Export Board');
+        }
+    });
     
     importBoardBtn.addEventListener("click", () => {
         BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
+        // Track import action with Umami
+        if (window.umami) {
+            umami.track('Import Board');
+        }
+    });
+    
+    // GitHub button with Umami tracking
+    document.getElementById("github").addEventListener("click", () => {
+        // Track GitHub link click with Umami
+        if (window.umami) {
+            umami.track('GitHub Link');
+        }
+        window.location.href = 'https://github.com/AndrewOKC/Excaliban';
     });
     
     // Board click event delegation
