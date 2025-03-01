@@ -702,7 +702,6 @@ button:active {
 	header {
 		flex-direction: column;
 		align-items: flex-start;
-		gap: var(--space-lg);
 	}
 
 	h1 {
@@ -728,6 +727,10 @@ button:active {
 		width: 100%;
 		flex-grow: 1;
 		justify-content: flex-start;
+	}
+
+	.controls-left {
+		display: none;
 	}
 
 	.search-container {
