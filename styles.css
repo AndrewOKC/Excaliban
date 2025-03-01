@@ -119,8 +119,12 @@ h1 {
 	gap: var(--space-xl);
 	overflow-x: auto;
 	padding-bottom: var(--space-xl);
+	/* Standard viewport height calculation */
 	height: calc(100vh - 200px);
 	max-height: calc(100vh - 200px);
+	/* Mobile-friendly viewport height using CSS custom property */
+	height: calc((var(--vh, 1vh) * 100) - 200px);
+	max-height: calc((var(--vh, 1vh) * 100) - 200px);
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none; /* IE and Edge */
 }
@@ -769,7 +773,11 @@ button:active {
 	}
 
 	.board {
+		/* Standard viewport height calculation */
 		height: calc(100vh - 280px);
 		max-height: calc(100vh - 280px);
+		/* Mobile-friendly viewport height using CSS custom property */
+		height: calc((var(--vh, 1vh) * 100) - 280px);
+		max-height: calc((var(--vh, 1vh) * 100) - 280px);
 	}
 }
