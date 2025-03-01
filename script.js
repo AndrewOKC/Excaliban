@@ -222,11 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Delete task button clicked
         if (event.target.classList.contains("delete-task")) {
-            if (confirm("Are you sure you want to delete this task?")) {
-                event.target.closest(".task").remove();
-                saveBoard();
-                showNotification("Task deleted");
-            }
+            event.target.closest(".task").remove();
+            saveBoard();
+            showNotification("Task deleted");
         }
 
         // Delete column button clicked
