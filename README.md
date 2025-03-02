@@ -1,3 +1,9 @@
+<a href="https://excalidban.com/" target="_blank" rel="noopener">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" alt="Excaliban" srcset="https://excaliban.com/meta/excaliban_github_cover.png" />
+    <img alt="Excaliban" src="https://excaliban.com/meta/excaliban_github_cover.png" />
+  </picture>
+</a>
 
 <h4 align="center">
   <a href="https://excaliban.com">Hosted App</a> |
@@ -23,7 +29,7 @@
 
 ## Features
 
-Excaliban kanban board support:
+Excaliban kanban boards support:
 
 - 🗃&nbsp;Multiple Boards.
 - 📚&nbsp;Task Colors.
@@ -37,7 +43,7 @@ Excaliban kanban board support:
 
 ## Excaliban.com
 
-The app hosted at [excaliban.com](https://excaliban.com/) is a minimal showcase of what you can build with excaliban. Its [source code](https://github.com/AndrewOKC/Excaliban) is part of this repository as well, and the app features:
+The app hosted at [excaliban.com](https://excaliban.com/) is a minimal showcase. Its [source code](https://github.com/AndrewOKC/Excaliban) is part of this repository.
 
 ## Mobile Support
 
