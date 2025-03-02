@@ -21,10 +21,10 @@
 	--color-accent-shadow-hover: rgba(105, 101, 219, 0.3);
 
 	/* Priority colors */
-	--color-priority-low: #518b46; /* Green */
-	--color-priority-medium: #f9a825; /* Yellow */
-	--color-priority-high: #f28275; /* Red */
-	--color-delete: #ff6b6b;
+	--color-priority-low: #57e06b; /* Green */
+	--color-priority-medium: #e0bc57; /* Yellow */
+	--color-priority-high: #e05757; /* Red */
+	--color-delete: #e05757;
 
 	/* Spacing */
 	--space-xs: 5px;
