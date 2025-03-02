@@ -15,7 +15,7 @@
     </a>
     <figcaption>
       <p align="center">
-        Excaliban is PWA compliant. You're all to install it locally onto your desktop!
+        Excaliban is PWA compliant. You're able to install it, locally, onto your desktop!
       </p>
     </figcaption>
   </figure>
