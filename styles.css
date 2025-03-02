@@ -707,6 +707,8 @@ button:active {
 	.board {
 		height: calc(100vh - 150px);
 		max-height: calc(100vh - 150px);
+		height: calc((var(--vh, 1vh) * 100) - 150px);
+		max-height: calc((var(--vh, 1vh) * 100) - 150px);
 	}
 }
 
