@@ -691,13 +691,22 @@ button:active {
    ========================================================================== */
 
 /* Tablet */
-@media (max-width: 1024px) {
+@media (max-width: 1250px) {
 	h1 {
 		font-size: 2.5rem;
 	}
 
 	.controls {
 		gap: var(--space-xl);
+	}
+
+	.controls-left {
+		display: none;
+	}
+
+	.board {
+		height: calc(100vh - 150px);
+		max-height: calc(100vh - 150px);
 	}
 }
 
