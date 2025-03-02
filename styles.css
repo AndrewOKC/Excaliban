@@ -405,7 +405,7 @@ button:active {
 
 .delete-column {
 	right: var(--space-md);
-	top: 30%;
+	top: 20%;
 }
 
 .delete-task {
