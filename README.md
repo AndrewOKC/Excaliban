@@ -10,9 +10,14 @@
   <a href="https://discord.gg/22SPJduh">Discord</a>
 </h4>
 
-<h3 align="center">
-    An open source hand-drawn style kanban board.
-</h3>
+<div align="center">
+  <h2>
+    An open source hand-drawn style kanban board! </br>
+    No account required! </br>
+  <br />
+  </h2>
+</div>
+
 
 <div align="center">
   <figure>
