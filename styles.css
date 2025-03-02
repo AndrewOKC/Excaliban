@@ -777,7 +777,7 @@ button:active {
 		height: calc(100vh - 280px);
 		max-height: calc(100vh - 280px);
 		/* Mobile-friendly viewport height using CSS custom property */
-		height: calc((var(--vh, 1vh) * 100) - 280px);
-		max-height: calc((var(--vh, 1vh) * 100) - 280px);
+		height: calc((var(--vh, 1vh) * 100) - 240px);
+		max-height: calc((var(--vh, 1vh) * 100) - 240px);
 	}
 }
