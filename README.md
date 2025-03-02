@@ -10,7 +10,7 @@
 
 <div align="center">
   <figure>
-    <a href="https://excalidraw.com" target="_blank" rel="noopener">
+    <a href="https://excaliban.com" target="_blank" rel="noopener">
       <img src="https://excaliban.com/meta/showcase_mac.png" alt="Mac PWA Showcase" />
     </a>
     <figcaption>
@@ -41,11 +41,11 @@ The app hosted at [excaliban.com](https://excaliban.com/) is a minimal showcase 
 
 ## Mobile Support
 
-The application has already gone through some mobile optimizations. More optimizations are planned! Consider joining the [Discord Server](https://discord.gg/22SPJduh), and sending us suggestions on how we should optimize for mobile. 
+The application has already gone through some mobile optimizations. More optimizations are planned! Consider joining the [Discord Server](https://discord.gg/22SPJduh), and sending us suggestions on how we should continue optimizing. 
 
-<div align="center">
+<div align="left">
   <figure>
-    <a href="https://excalidraw.com" target="_blank" rel="noopener">
+    <a href="https://excaliban.com" target="_blank" rel="noopener">
       <img src="https://excaliban.com/meta/showcase_iphone.PNG" alt="Mobile Optimization  Showcase" width=300/>
     </a>
   </figure>
