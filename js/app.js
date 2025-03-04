@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const importBoardBtn = document.getElementById('import-board');
 	const columnTemplate = document.getElementById('column-template');
 	const taskTemplate = document.getElementById('task-template');
-	// const colorPicker = document.getElementById("color-picker");
-	// const colorOptions = document.querySelectorAll('.color-option');
 	const colorOptionsSmall = document.querySelectorAll('.color-option-small');
 	const boardDropdown = document.getElementById('board-dropdown');
 	const newBoardBtn = document.getElementById('new-board');
@@ -46,13 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Add keyboard event listener for ESC key to close modals
 	document.addEventListener('keydown', function (e) {
 		if (e.key === 'Escape') {
-			// TaskManager.hideColorPicker(colorPicker);
 			TaskManager.closeTaskEditModal(taskEditModal);
 		}
 	});
 
 	// Hide elements initially
-	// colorPicker.style.display = "none";
 	taskEditModal.style.display = 'none';
 
 	// Populate board dropdown
@@ -91,13 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		colorOptionsSmall,
 		saveBoardWrapper
 	);
-
-	// Set up color picker
-	// TaskManager.setupColorPicker(
-	//     colorPicker,
-	//     colorOptions,
-	//     saveBoardWrapper
-	// );
 
 	// Set up drag and drop
 	setupDragAndDrop(board, saveBoardWrapper);
@@ -162,12 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				saveBoardWrapper
 			);
 		}
-
-		// Color task button clicked
-		// if (event.target.classList.contains('color-task')) {
-		// 	event.stopPropagation();
-		// 	TaskManager.showColorPicker(colorPicker, event.target);
-		// }
 
 		// Edit task button clicked
 		if (event.target.classList.contains('edit-task')) {
