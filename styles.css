@@ -525,6 +525,26 @@ button:active {
 	margin-top: var(--space-xl);
 }
 
+/* Color picker component */
+.color-picker {
+	position: absolute;
+	display: none;
+	background: var(--color-surface-light);
+	border: 2px solid var(--color-accent);
+	border-radius: var(--radius-lg);
+	padding: var(--space-md);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+	flex-wrap: wrap;
+	width: 160px;
+	gap: var(--space-sm);
+}
+
+.color-picker.visible {
+	display: flex;
+	animation: fadeIn 0.2s ease-out;
+}
+
 .color-option,
 .color-option-small {
 	width: 30px;
@@ -753,6 +773,14 @@ button:active {
 	.modal-content {
 		width: 95%;
 		padding: var(--space-lg);
+	}
+
+	.color-picker {
+		position: fixed;
+		bottom: var(--space-xl);
+		left: 50%;
+		transform: translateX(-50%);
+		top: auto !important;
 	}
 
 	.board {
