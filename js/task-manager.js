@@ -55,25 +55,17 @@ export function deleteTask(taskElement, saveBoardCallback) {
  * @param {NodeList} colorOptionsSmall - The small color options in the modal
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
-export function setupTaskEditModal(
-	taskEditModal,
-	editTaskForm,
-	colorOptionsSmall,
-	saveBoardCallback
-) {
+export function setupTaskEditModal(taskEditModal, editTaskForm, colorOptionsSmall, saveBoardCallback) {
 	// Event listeners for small color options in the edit modal
 	colorOptionsSmall.forEach((option) => {
 		option.style.backgroundColor = option.dataset.color;
 		option.addEventListener('click', (e) => {
 			// Remove selected class from all options
-			colorOptionsSmall.forEach((opt) =>
-				opt.classList.remove('selected')
-			);
+			colorOptionsSmall.forEach((opt) => opt.classList.remove('selected'));
 			// Add selected class to clicked option
 			option.classList.add('selected');
 			// Set the hidden input value
-			document.getElementById('edit-task-color').value =
-				option.dataset.color;
+			document.getElementById('edit-task-color').value = option.dataset.color;
 		});
 	});
 
@@ -95,9 +87,7 @@ export function openTaskEditModal(taskEditModal, task, colorOptionsSmall) {
 
 	// Populate form with task data
 	const editTaskTitle = document.getElementById('edit-task-title');
-	const editTaskDescription = document.getElementById(
-		'edit-task-description'
-	);
+	const editTaskDescription = document.getElementById('edit-task-description');
 	const editTaskPriority = document.getElementById('edit-task-priority');
 	const editTaskDueDate = document.getElementById('edit-task-due-date');
 
@@ -143,15 +133,12 @@ function saveTaskEdit(taskEditModal, saveBoardCallback) {
 	if (!currentEditTask) return;
 
 	const editTaskTitle = document.getElementById('edit-task-title');
-	const editTaskDescription = document.getElementById(
-		'edit-task-description'
-	);
+	const editTaskDescription = document.getElementById('edit-task-description');
 	const editTaskPriority = document.getElementById('edit-task-priority');
 	const editTaskDueDate = document.getElementById('edit-task-due-date');
 
 	// Update task with form data
-	currentEditTask.querySelector('.task-content').textContent =
-		editTaskTitle.value;
+	currentEditTask.querySelector('.task-content').textContent = editTaskTitle.value;
 	currentEditTask.dataset.description = editTaskDescription.value;
 	currentEditTask.dataset.priority = editTaskPriority.value;
 	currentEditTask.dataset.dueDate = editTaskDueDate.value;
@@ -165,9 +152,7 @@ function saveTaskEdit(taskEditModal, saveBoardCallback) {
 	// Update due date display
 	const dueDateElement = currentEditTask.querySelector('.task-due-date');
 	if (editTaskDueDate.value) {
-		const formattedDate = new Date(
-			editTaskDueDate.value
-		).toLocaleDateString();
+		const formattedDate = new Date(editTaskDueDate.value).toLocaleDateString();
 		dueDateElement.textContent = formattedDate;
 
 		// Check if date is overdue
@@ -214,12 +199,8 @@ export function searchTasks(searchTerm) {
 	}
 
 	tasks.forEach((task) => {
-		const content = task
-			.querySelector('.task-content')
-			.textContent.toLowerCase();
-		const description = task.dataset.description
-			? task.dataset.description.toLowerCase()
-			: '';
+		const content = task.querySelector('.task-content').textContent.toLowerCase();
+		const description = task.dataset.description ? task.dataset.description.toLowerCase() : '';
 
 		if (content.includes(searchTerm) || description.includes(searchTerm)) {
 			task.style.display = 'block';

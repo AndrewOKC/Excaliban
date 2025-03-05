@@ -4,8 +4,7 @@
 import { initializeBoards, saveBoard } from './storage.js';
 import { setupDragAndDrop } from './drag-drop.js';
 import { registerServiceWorker } from './pwa.js';
-import { showNotification } from './utils.js';
-import { initViewportHeight } from './viewport-utils.js';
+import { showNotification, initViewportHeight } from './utils.js';
 import * as TaskManager from './task-manager.js';
 import * as BoardManager from './board-manager.js';
 
@@ -62,14 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Load board wrapper function
 	const loadBoardWrapper = (boardId) => {
 		currentBoardId = boardId;
-		BoardManager.loadBoard(
-			board,
-			currentBoardId,
-			columnTemplate,
-			taskTemplate,
-			boardDropdown,
-			saveBoardWrapper
-		);
+		BoardManager.loadBoard(board, currentBoardId, columnTemplate, taskTemplate, boardDropdown, saveBoardWrapper);
 	};
 
 	// Populate dropdown wrapper function
@@ -81,12 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	loadBoardWrapper(currentBoardId);
 
 	// Set up task edit modal
-	TaskManager.setupTaskEditModal(
-		taskEditModal,
-		taskEditForm,
-		colorOptionsSmall,
-		saveBoardWrapper
-	);
+	TaskManager.setupTaskEditModal(taskEditModal, taskEditForm, colorOptionsSmall, saveBoardWrapper);
 
 	// Set up drag and drop
 	setupDragAndDrop(board, saveBoardWrapper);
@@ -129,66 +116,41 @@ document.addEventListener('DOMContentLoaded', () => {
 	board.addEventListener('click', (event) => {
 		// Add task button clicked
 		if (event.target.classList.contains('add-task')) {
-			TaskManager.addTask(
-				event.target.closest('.column'),
-				taskTemplate,
-				saveBoardWrapper
-			);
+			TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
 		}
 
 		// Delete task button clicked
 		if (event.target.classList.contains('delete-task')) {
-			TaskManager.deleteTask(
-				event.target.closest('.task'),
-				saveBoardWrapper
-			);
+			TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
 		}
 
 		// Delete column button clicked
 		if (event.target.classList.contains('delete-column')) {
-			BoardManager.deleteColumn(
-				event.target.closest('.column'),
-				saveBoardWrapper
-			);
+			BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
 		}
 
 		// Edit task button clicked
 		if (event.target.classList.contains('edit-task')) {
 			event.stopPropagation();
-			TaskManager.openTaskEditModal(
-				taskEditModal,
-				event.target.closest('.task'),
-				colorOptionsSmall
-			);
+			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptionsSmall);
 		}
 	});
 
 	// Save when a contenteditable element loses focus
 	board.addEventListener('focusout', (event) => {
-		if (
-			event.target.classList.contains('task-content') ||
-			event.target.classList.contains('column-title')
-		) {
+		if (event.target.classList.contains('task-content') || event.target.classList.contains('column-title')) {
 			saveBoardWrapper();
 		}
 	});
 
 	// Board dropdown change
 	boardDropdown.addEventListener('change', (e) => {
-		BoardManager.switchBoard(
-			e.target.value,
-			saveBoardWrapper,
-			loadBoardWrapper
-		);
+		BoardManager.switchBoard(e.target.value, saveBoardWrapper, loadBoardWrapper);
 	});
 
 	// Board management buttons
 	newBoardBtn.addEventListener('click', () => {
-		BoardManager.createNewBoard(
-			saveBoardWrapper,
-			loadBoardWrapper,
-			populateDropdownWrapper
-		);
+		BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
 	});
 
 	renameBoardBtn.addEventListener('click', () => {
@@ -196,11 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	deleteBoardBtn.addEventListener('click', () => {
-		const newId = BoardManager.deleteBoard(
-			currentBoardId,
-			loadBoardWrapper,
-			populateDropdownWrapper
-		);
+		const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
 		if (newId) currentBoardId = newId;
 	});
 

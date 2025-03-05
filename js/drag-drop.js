@@ -68,9 +68,7 @@ export function setupDragAndDrop(board, saveBoardCallback) {
  */
 function getDragAfterElement(container, y) {
 	// Get all task elements that aren't currently being dragged
-	const draggableElements = [
-		...container.querySelectorAll('.task:not(.dragging)'),
-	];
+	const draggableElements = [...container.querySelectorAll('.task:not(.dragging)')];
 
 	// Find the task element that should come after the dragged element
 	return draggableElements.reduce(

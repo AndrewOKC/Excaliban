@@ -38,11 +38,7 @@ export function addColumn(board, columnTemplate, saveBoardCallback) {
  * @param {Function} saveBoardCallback - Function to call after deleting the column
  */
 export function deleteColumn(columnElement, saveBoardCallback) {
-	if (
-		confirm(
-			'Are you sure you want to delete this column and all its tasks?'
-		)
-	) {
+	if (confirm('Are you sure you want to delete this column and all its tasks?')) {
 		columnElement.remove();
 		saveBoardCallback();
 		showNotification('Column deleted');
@@ -84,14 +80,7 @@ export function clearBoard(board, columnTemplate, saveBoardCallback) {
  * @param {HTMLSelectElement} boardDropdown - The board dropdown element
  * @param {Function} saveBoardCallback - Function to call if default board is created
  */
-export function loadBoard(
-	board,
-	currentBoardId,
-	columnTemplate,
-	taskTemplate,
-	boardDropdown,
-	saveBoardCallback
-) {
+export function loadBoard(board, currentBoardId, columnTemplate, taskTemplate, boardDropdown, saveBoardCallback) {
 	// Clear existing board first
 	board.innerHTML = '';
 
@@ -120,8 +109,7 @@ export function loadBoard(
 				const taskContent = taskNode.querySelector('.task-content');
 
 				// Set task content
-				taskContent.textContent =
-					typeof task === 'object' ? task.content : task;
+				taskContent.textContent = typeof task === 'object' ? task.content : task;
 
 				// Set task border color if available
 				if (typeof task === 'object' && task.color) {
@@ -143,11 +131,8 @@ export function loadBoard(
 				// Set task due date if available
 				if (typeof task === 'object' && task.dueDate) {
 					taskElement.dataset.dueDate = task.dueDate;
-					const dueDateElement =
-						taskNode.querySelector('.task-due-date');
-					const formattedDate = new Date(
-						task.dueDate
-					).toLocaleDateString();
+					const dueDateElement = taskNode.querySelector('.task-due-date');
+					const formattedDate = new Date(task.dueDate).toLocaleDateString();
 					dueDateElement.textContent = formattedDate;
 
 					// Check if date is overdue
@@ -223,11 +208,7 @@ export function switchBoard(boardId, saveBoardCallback, loadBoardCallback) {
  * @param {Function} populateDropdownCallback - Function to update the board dropdown
  * @returns {string|null} - The ID of the new board or null if cancelled
  */
-export function createNewBoard(
-	saveBoardCallback,
-	loadBoardCallback,
-	populateDropdownCallback
-) {
+export function createNewBoard(saveBoardCallback, loadBoardCallback, populateDropdownCallback) {
 	const boardName = prompt('Enter a name for the new board:');
 
 	if (boardName && boardName.trim() !== '') {
@@ -271,10 +252,7 @@ export function renameBoard(currentBoardId, populateDropdownCallback) {
 	const boards = getAllBoards();
 	const currentBoard = boards.find((board) => board.id === currentBoardId);
 
-	const newName = prompt(
-		'Enter a new name for this board:',
-		currentBoard.name
-	);
+	const newName = prompt('Enter a new name for this board:', currentBoard.name);
 
 	if (newName && newName.trim() !== '') {
 		// Update board name
@@ -295,11 +273,7 @@ export function renameBoard(currentBoardId, populateDropdownCallback) {
  * @param {Function} populateDropdownCallback - Function to update the board dropdown
  * @returns {string|null} - The ID of the new current board or null if cancelled
  */
-export function deleteBoard(
-	currentBoardId,
-	loadBoardCallback,
-	populateDropdownCallback
-) {
+export function deleteBoard(currentBoardId, loadBoardCallback, populateDropdownCallback) {
 	const boards = getAllBoards();
 
 	// Don't allow deleting the last board
@@ -308,15 +282,9 @@ export function deleteBoard(
 		return null;
 	}
 
-	if (
-		confirm(
-			'Are you sure you want to delete this board? This action cannot be undone.'
-		)
-	) {
+	if (confirm('Are you sure you want to delete this board? This action cannot be undone.')) {
 		// Find current board index
-		const currentBoardIndex = boards.findIndex(
-			(board) => board.id === currentBoardId
-		);
+		const currentBoardIndex = boards.findIndex((board) => board.id === currentBoardId);
 
 		// Remove current board
 		boards.splice(currentBoardIndex, 1);
@@ -325,8 +293,7 @@ export function deleteBoard(
 		localStorage.setItem('kanbanBoards', JSON.stringify(boards));
 
 		// Set new current board ID (previous board, or first if deleted first board)
-		const newCurrentBoardId =
-			boards[currentBoardIndex > 0 ? currentBoardIndex - 1 : 0].id;
+		const newCurrentBoardId = boards[currentBoardIndex > 0 ? currentBoardIndex - 1 : 0].id;
 
 		// Update dropdown
 		populateDropdownCallback();
@@ -348,9 +315,7 @@ export function exportBoard() {
 	const boards = getAllBoards();
 
 	// Create a download file
-	const dataStr =
-		'data:text/json;charset=utf-8,' +
-		encodeURIComponent(JSON.stringify(boards));
+	const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(boards));
 	const downloadAnchorNode = document.createElement('a');
 	downloadAnchorNode.setAttribute('href', dataStr);
 	downloadAnchorNode.setAttribute('download', 'excaliban_boards.json');
@@ -402,10 +367,7 @@ export function importBoard(loadBoardCallback, populateDropdownCallback) {
 
 				showNotification('Boards imported successfully');
 			} catch (err) {
-				showNotification(
-					'Error importing boards: ' + err.message,
-					true
-				);
+				showNotification('Error importing boards: ' + err.message, true);
 			}
 		};
 

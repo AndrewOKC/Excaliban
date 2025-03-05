@@ -11,10 +11,7 @@ export function registerServiceWorker() {
 			navigator.serviceWorker
 				.register('/service-worker.js')
 				.then((registration) => {
-					console.log(
-						'ServiceWorker registration successful with scope: ',
-						registration.scope
-					);
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
 
 					// Check for updates every time the page loads
 					registration.update();
@@ -24,16 +21,9 @@ export function registerServiceWorker() {
 						const newWorker = registration.installing;
 
 						newWorker.onstatechange = () => {
-							if (
-								newWorker.state === 'installed' &&
-								navigator.serviceWorker.controller
-							) {
+							if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
 								// New content is available, let's reload
-								if (
-									confirm(
-										'New version of the app is available. Reload now?'
-									)
-								) {
+								if (confirm('New version of the app is available. Reload now?')) {
 									window.location.reload();
 								}
 							}
