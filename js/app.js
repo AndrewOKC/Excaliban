@@ -17,22 +17,13 @@ initViewportHeight();
 document.addEventListener('DOMContentLoaded', () => {
 	// DOM elements
 	const board = document.getElementById('board');
-	//
 	const columnTemplate = document.getElementById('column-template');
 	const taskTemplate = document.getElementById('task-template');
-	//
 	const searchInput = document.getElementById('search-tasks');
-	//
 	const boardDropdown = document.getElementById('board-dropdown');
-	const newBoardBtn = document.getElementById('new-board');
-	const renameBoardBtn = document.getElementById('rename-board');
-	const deleteBoardBtn = document.getElementById('delete-board');
-	//
 	const taskEditModal = document.getElementById('task-edit-modal');
-	const taskEditForm = document.getElementById('task-edit-form');
 	const colorOptions = document.querySelectorAll('.color-option');
-	const cancelEditBtn = document.getElementById('cancel-edit');
-	const modalCloseBtn = document.getElementById('modal-close');
+	const taskEditForm = document.getElementById('task-edit-form');
 
 	// Current active board
 	let currentBoardId = initializeBoards();
@@ -40,46 +31,84 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Debounce timer for search
 	let searchTimer = null;
 
-	// Hide elements initially
+	// Edit Modal : Hide Initially
 	taskEditModal.style.display = 'none';
 
-	// Populate board dropdown
-	BoardManager.populateBoardDropdown(boardDropdown, currentBoardId);
-
-	// Save board wrapper function
+	// Board : Save Wrapper
 	const saveBoardWrapper = () => {
 		saveBoard(currentBoardId, board);
 	};
 
-	// Load board wrapper function
+	// Board : Load Wrapper
 	const loadBoardWrapper = (boardId) => {
 		currentBoardId = boardId;
 		BoardManager.loadBoard(board, currentBoardId, columnTemplate, taskTemplate, boardDropdown, saveBoardWrapper);
 	};
 
-	// Populate dropdown wrapper function
+	// Board : Load Initial
+	loadBoardWrapper(currentBoardId);
+
+	// Board Dropdown : Populate Wrapper
 	const populateDropdownWrapper = () => {
 		BoardManager.populateBoardDropdown(boardDropdown, currentBoardId);
 	};
 
-	// Load selected board
-	loadBoardWrapper(currentBoardId);
+	// Board Dropdown : Populate
+	BoardManager.populateBoardDropdown(boardDropdown, currentBoardId);
 
-	// Set up task edit modal
+	// Board Dropdown : Handle Change
+	boardDropdown.addEventListener('change', (e) => {
+		BoardManager.switchBoard(e.target.value, saveBoardWrapper, loadBoardWrapper);
+	});
+
+	// Task Edit Modal : Setup
 	TaskManager.setupTaskEditModal(taskEditModal, taskEditForm, colorOptions, saveBoardWrapper);
 
-	// Set up drag and drop
+	// Drag and Drop Functionality : Setup
 	setupDragAndDrop(board, saveBoardWrapper);
 
-	// ESC key event listener
+	// ContentEditable : Handle Focus Out (Saves Board on Exiting Editable Content)
+	board.addEventListener('focusout', (event) => {
+		if (event.target.classList.contains('task-content') || event.target.classList.contains('column-title')) {
+			saveBoardWrapper();
+		}
+	});
+
+	// Search : Handle Input
+	searchInput.addEventListener('input', (e) => {
+		// Debounce search
+		clearTimeout(searchTimer);
+		searchTimer = setTimeout(() => {
+			const searchTerm = e.target.value.toLowerCase().trim();
+			TaskManager.searchTasks(searchTerm);
+		}, 300);
+	});
+
+	// ESC Key : Event Listener
 	document.addEventListener('keydown', function (e) {
 		if (e.key === 'Escape') {
 			TaskManager.closeTaskEditModal(taskEditModal);
 		}
 	});
 
-	// Button event listeners
+	// Button Click : Event Listener
 	document.addEventListener('click', (event) => {
+		// Create new board button
+		if (event.target.id === 'new-board') {
+			BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
+		}
+
+		// Rename board button
+		if (event.target.id === 'rename-board') {
+			BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
+		}
+
+		// Delete board button
+		if (event.target.id === 'delete-board') {
+			const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
+			if (newId) currentBoardId = newId;
+		}
+
 		// Add column
 		if (event.target.id === 'add-column') {
 			BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
@@ -117,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.href = 'https://github.com/AndrewOKC/Excaliban';
 		}
 
+		// Delete column button
+		if (event.target.id === 'delete-column') {
+			BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
+		}
+
 		// Add task button
 		if (event.target.id === 'add-task') {
 			TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
@@ -133,54 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
 		}
 
-		// Delete column button
-		if (event.target.id === 'delete-column') {
-			BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
+		// Close edit modal button
+		if (event.target.id === 'close-edit-modal') {
+			TaskManager.closeTaskEditModal(taskEditModal);
 		}
-	});
 
-	// Save when a contenteditable element loses focus
-	board.addEventListener('focusout', (event) => {
-		if (event.target.classList.contains('task-content') || event.target.classList.contains('column-title')) {
-			saveBoardWrapper();
+		// Cancel edit modal button
+		if (event.target.id === 'cancel-edit-modal') {
+			TaskManager.closeTaskEditModal(taskEditModal);
 		}
-	});
-
-	// Search input
-	searchInput.addEventListener('input', (e) => {
-		// Debounce search
-		clearTimeout(searchTimer);
-		searchTimer = setTimeout(() => {
-			const searchTerm = e.target.value.toLowerCase().trim();
-			TaskManager.searchTasks(searchTerm);
-		}, 300);
-	});
-
-	// Board dropdown change
-	boardDropdown.addEventListener('change', (e) => {
-		BoardManager.switchBoard(e.target.value, saveBoardWrapper, loadBoardWrapper);
-	});
-
-	// Board management buttons
-	newBoardBtn.addEventListener('click', () => {
-		BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
-	});
-
-	renameBoardBtn.addEventListener('click', () => {
-		BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
-	});
-
-	deleteBoardBtn.addEventListener('click', () => {
-		const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
-		if (newId) currentBoardId = newId;
-	});
-
-	// Modal close buttons
-	cancelEditBtn.addEventListener('click', () => {
-		TaskManager.closeTaskEditModal(taskEditModal);
-	});
-
-	modalCloseBtn.addEventListener('click', () => {
-		TaskManager.closeTaskEditModal(taskEditModal);
 	});
 });

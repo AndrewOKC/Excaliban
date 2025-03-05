@@ -588,7 +588,7 @@ button:active {
 	position: relative;
 }
 
-.modal-close {
+.close-edit-modal {
 	position: absolute;
 	top: var(--space-md);
 	right: var(--space-lg);
@@ -597,7 +597,7 @@ button:active {
 	color: var(--color-text);
 }
 
-.modal-close:hover {
+.close-edit-modal:hover {
 	color: var(--color-priority-high);
 }
 
