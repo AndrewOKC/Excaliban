@@ -52,16 +52,16 @@ export function deleteTask(taskElement, saveBoardCallback) {
  * Set up the task edit modal functionality
  * @param {HTMLElement} taskEditModal - The task edit modal element
  * @param {HTMLElement} editTaskForm - The task edit form
- * @param {NodeList} colorOptionsSmall - The small color options in the modal
+ * @param {NodeList} colorOptions - The small color options in the modal
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
-export function setupTaskEditModal(taskEditModal, editTaskForm, colorOptionsSmall, saveBoardCallback) {
+export function setupTaskEditModal(taskEditModal, editTaskForm, colorOptions, saveBoardCallback) {
 	// Event listeners for small color options in the edit modal
-	colorOptionsSmall.forEach((option) => {
+	colorOptions.forEach((option) => {
 		option.style.backgroundColor = option.dataset.color;
 		option.addEventListener('click', (e) => {
 			// Remove selected class from all options
-			colorOptionsSmall.forEach((opt) => opt.classList.remove('selected'));
+			colorOptions.forEach((opt) => opt.classList.remove('selected'));
 			// Add selected class to clicked option
 			option.classList.add('selected');
 			// Set the hidden input value
@@ -80,9 +80,9 @@ export function setupTaskEditModal(taskEditModal, editTaskForm, colorOptionsSmal
  * Open the task edit modal
  * @param {HTMLElement} taskEditModal - The task edit modal element
  * @param {HTMLElement} task - The task to edit
- * @param {NodeList} colorOptionsSmall - The small color options in the modal
+ * @param {NodeList} colorOptions - The small color options in the modal
  */
-export function openTaskEditModal(taskEditModal, task, colorOptionsSmall) {
+export function openTaskEditModal(taskEditModal, task, colorOptions) {
 	currentEditTask = task;
 
 	// Populate form with task data
@@ -99,7 +99,7 @@ export function openTaskEditModal(taskEditModal, task, colorOptionsSmall) {
 	document.getElementById('edit-task-color').value = taskColor;
 
 	// Set the selected color in the color options
-	colorOptionsSmall.forEach((option) => {
+	colorOptions.forEach((option) => {
 		option.classList.remove('selected');
 		if (option.dataset.color === taskColor) {
 			option.classList.add('selected');

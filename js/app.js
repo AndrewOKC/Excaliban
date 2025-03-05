@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const importBoardBtn = document.getElementById('import-board');
 	const columnTemplate = document.getElementById('column-template');
 	const taskTemplate = document.getElementById('task-template');
-	const colorOptionsSmall = document.querySelectorAll('.color-option-small');
+	const colorOptions = document.querySelectorAll('.color-option');
 	const boardDropdown = document.getElementById('board-dropdown');
 	const newBoardBtn = document.getElementById('new-board');
 	const renameBoardBtn = document.getElementById('rename-board');
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	loadBoardWrapper(currentBoardId);
 
 	// Set up task edit modal
-	TaskManager.setupTaskEditModal(taskEditModal, taskEditForm, colorOptionsSmall, saveBoardWrapper);
+	TaskManager.setupTaskEditModal(taskEditModal, taskEditForm, colorOptions, saveBoardWrapper);
 
 	// Set up drag and drop
 	setupDragAndDrop(board, saveBoardWrapper);
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Edit task button clicked
 		if (event.target.classList.contains('edit-task')) {
 			event.stopPropagation();
-			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptionsSmall);
+			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
 		}
 	});
 

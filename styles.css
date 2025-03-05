@@ -526,7 +526,7 @@ button:active {
 }
 
 .color-option,
-.color-option-small {
+.color-option {
 	width: 30px;
 	height: 30px;
 	border-radius: var(--radius-sm);
@@ -536,7 +536,7 @@ button:active {
 }
 
 .color-option:hover,
-.color-option-small:hover {
+.color-option:hover {
 	transform: scale(1.1);
 	border-color: var(--color-text);
 }
@@ -548,12 +548,12 @@ button:active {
 	margin-top: var(--space-sm);
 }
 
-.color-option-small {
+.color-option {
 	width: 36px;
 	height: 36px;
 }
 
-.color-option-small.selected {
+.color-option.selected {
 	border: 2px solid white;
 	box-shadow: 0 0 0 2px var(--color-accent);
 }
