@@ -17,20 +17,20 @@ initViewportHeight();
 document.addEventListener('DOMContentLoaded', () => {
 	// DOM elements
 	const board = document.getElementById('board');
-	const addColumnBtn = document.getElementById('add-column');
-	const clearBoardBtn = document.getElementById('clear-board');
-	const exportBoardBtn = document.getElementById('export-board');
-	const importBoardBtn = document.getElementById('import-board');
+	//
 	const columnTemplate = document.getElementById('column-template');
 	const taskTemplate = document.getElementById('task-template');
-	const colorOptions = document.querySelectorAll('.color-option');
+	//
+	const searchInput = document.getElementById('search-tasks');
+	//
 	const boardDropdown = document.getElementById('board-dropdown');
 	const newBoardBtn = document.getElementById('new-board');
 	const renameBoardBtn = document.getElementById('rename-board');
 	const deleteBoardBtn = document.getElementById('delete-board');
-	const searchInput = document.getElementById('search-tasks');
+	//
 	const taskEditModal = document.getElementById('task-edit-modal');
 	const taskEditForm = document.getElementById('task-edit-form');
+	const colorOptions = document.querySelectorAll('.color-option');
 	const cancelEditBtn = document.getElementById('cancel-edit');
 	const modalCloseBtn = document.getElementById('modal-close');
 
@@ -39,13 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Debounce timer for search
 	let searchTimer = null;
-
-	// Add keyboard event listener for ESC key to close modals
-	document.addEventListener('keydown', function (e) {
-		if (e.key === 'Escape') {
-			TaskManager.closeTaskEditModal(taskEditModal);
-		}
-	});
 
 	// Hide elements initially
 	taskEditModal.style.display = 'none';
@@ -78,61 +71,71 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Set up drag and drop
 	setupDragAndDrop(board, saveBoardWrapper);
 
-	// Event listeners with Umami tracking
-	addColumnBtn.addEventListener('click', () => {
-		BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
-	});
-
-	clearBoardBtn.addEventListener('click', () => {
-		BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
-	});
-
-	exportBoardBtn.addEventListener('click', () => {
-		// Track export action with Umami
-		if (window.umami) {
-			umami.track('Export Board');
+	// ESC key event listener
+	document.addEventListener('keydown', function (e) {
+		if (e.key === 'Escape') {
+			TaskManager.closeTaskEditModal(taskEditModal);
 		}
-		BoardManager.exportBoard();
 	});
 
-	importBoardBtn.addEventListener('click', () => {
-		// Track import action with Umami
-		if (window.umami) {
-			umami.track('Import Board');
+	// Button event listeners
+	document.addEventListener('click', (event) => {
+		// Add column
+		if (event.target.id === 'add-column') {
+			BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
 		}
-		BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
-	});
 
-	// GitHub button with Umami tracking
-	document.getElementById('github').addEventListener('click', () => {
-		// Track GitHub link click with Umami
-		if (window.umami) {
-			umami.track('GitHub Link');
+		// Clear board button
+		if (event.target.id === 'clear-board') {
+			BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
 		}
-		window.location.href = 'https://github.com/AndrewOKC/Excaliban';
-	});
 
-	// Board click event delegation
-	board.addEventListener('click', (event) => {
-		// Add task button clicked
-		if (event.target.classList.contains('add-task')) {
+		// Export board button
+		if (event.target.id === 'export-board') {
+			// Track export action with Umami
+			if (window.umami) {
+				umami.track('Export Board');
+			}
+			BoardManager.exportBoard();
+		}
+
+		// Import board button
+		if (event.target.id === 'import-board') {
+			// Track import action with Umami
+			if (window.umami) {
+				umami.track('Import Board');
+			}
+			BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
+		}
+
+		// GitHub button
+		if (event.target.id === 'github') {
+			// Track GitHub link click with Umami
+			if (window.umami) {
+				umami.track('GitHub Link');
+			}
+			window.location.href = 'https://github.com/AndrewOKC/Excaliban';
+		}
+
+		// Add task button
+		if (event.target.id === 'add-task') {
 			TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
 		}
 
-		// Delete task button clicked
-		if (event.target.classList.contains('delete-task')) {
+		// Edit task button
+		if (event.target.id === 'edit-task') {
+			event.stopPropagation();
+			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
+		}
+
+		// Delete task button
+		if (event.target.id === 'delete-task') {
 			TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
 		}
 
-		// Delete column button clicked
-		if (event.target.classList.contains('delete-column')) {
+		// Delete column button
+		if (event.target.id === 'delete-column') {
 			BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
-		}
-
-		// Edit task button clicked
-		if (event.target.classList.contains('edit-task')) {
-			event.stopPropagation();
-			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
 		}
 	});
 
@@ -141,6 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (event.target.classList.contains('task-content') || event.target.classList.contains('column-title')) {
 			saveBoardWrapper();
 		}
+	});
+
+	// Search input
+	searchInput.addEventListener('input', (e) => {
+		// Debounce search
+		clearTimeout(searchTimer);
+		searchTimer = setTimeout(() => {
+			const searchTerm = e.target.value.toLowerCase().trim();
+			TaskManager.searchTasks(searchTerm);
+		}, 300);
 	});
 
 	// Board dropdown change
@@ -160,16 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	deleteBoardBtn.addEventListener('click', () => {
 		const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
 		if (newId) currentBoardId = newId;
-	});
-
-	// Search input
-	searchInput.addEventListener('input', (e) => {
-		// Debounce search
-		clearTimeout(searchTimer);
-		searchTimer = setTimeout(() => {
-			const searchTerm = e.target.value.toLowerCase().trim();
-			TaskManager.searchTasks(searchTerm);
-		}, 300);
 	});
 
 	// Modal close buttons

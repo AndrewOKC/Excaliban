@@ -85,11 +85,11 @@
 				<div class="column-header">
 					<h2 class="column-title" contenteditable="true">New Column</h2>
 					<div class="column-controls">
-						<button class="delete-column">×</button>
+						<button id="delete-column" class="delete-column">×</button>
 					</div>
 				</div>
 				<div class="task-list"></div>
-				<button class="add-task">+ Add Task</button>
+				<button id="add-task" class="add-task">+ Add Task</button>
 			</div>
 		</template>
 
@@ -102,8 +102,8 @@
 				<div class="task-footer">
 					<div class="task-due-date"></div>
 				</div>
-				<button class="edit-task" title="Edit details" aria-label="Edit task details">✏️</button>
-				<button class="delete-task" title="Delete task" aria-label="Delete task">×</button>
+				<button id="edit-task" class="edit-task" title="Edit details" aria-label="Edit task details">✏️</button>
+				<button id="delete-task" class="delete-task" title="Delete task" aria-label="Delete task">×</button>
 			</div>
 		</template>
 
