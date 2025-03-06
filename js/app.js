@@ -98,42 +98,51 @@ document.addEventListener('DOMContentLoaded', () => {
 		switch (targetId) {
 			// Board Management
 			case 'new-board':
+				if (window.umami) umami.track('New Board');
 				BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
 				break;
 
 			case 'rename-board':
+				if (window.umami) umami.track('Rename Board');
 				BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
 				break;
 
 			case 'delete-board':
+				if (window.umami) umami.track('Delete Board');
 				const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
 				if (newId) currentBoardId = newId;
 				break;
 
 			// Column Management
 			case 'add-column':
+				if (window.umami) umami.track('Add Column');
 				BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
 				break;
 
 			case 'delete-column':
+				if (window.umami) umami.track('Delete Column');
 				BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
 				break;
 
 			case 'clear-board':
+				if (window.umami) umami.track('Clear Board');
 				BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
 				break;
 
 			// Task Management
 			case 'add-task':
+				if (window.umami) umami.track('Add Task');
 				TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
 				break;
 
 			case 'edit-task':
 				event.stopPropagation();
+				if (window.umami) umami.track('Edit Task');
 				TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
 				break;
 
 			case 'delete-task':
+				if (window.umami) umami.track('Delete Task');
 				TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
 				break;
 
