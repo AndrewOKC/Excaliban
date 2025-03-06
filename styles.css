@@ -67,7 +67,8 @@
 /* Custom font to mimic Excalidraw's handwritten style */
 @font-face {
 	font-family: 'Virgil';
-	src: url('https://excalidraw.com/Virgil.woff2');
+	src: url('fonts/Virgil-Regular.woff2');
+	font-display: swap;
 }
 
 /* Base elements */
