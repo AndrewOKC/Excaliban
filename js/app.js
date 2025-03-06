@@ -91,90 +91,73 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	// Button Click : Event Listener
+	// Button Click : Event Listener (Using switch/case)
 	document.addEventListener('click', (event) => {
-		// Create new board button
-		if (event.target.id === 'new-board') {
-			BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
-		}
+		const targetId = event.target.id;
 
-		// Rename board button
-		if (event.target.id === 'rename-board') {
-			BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
-		}
+		switch (targetId) {
+			// Board Management
+			case 'new-board':
+				BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
+				break;
 
-		// Delete board button
-		if (event.target.id === 'delete-board') {
-			const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
-			if (newId) currentBoardId = newId;
-		}
+			case 'rename-board':
+				BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
+				break;
 
-		// Add column
-		if (event.target.id === 'add-column') {
-			BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
-		}
+			case 'delete-board':
+				const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
+				if (newId) currentBoardId = newId;
+				break;
 
-		// Clear board button
-		if (event.target.id === 'clear-board') {
-			BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
-		}
+			// Column Management
+			case 'add-column':
+				BoardManager.addColumn(board, columnTemplate, saveBoardWrapper);
+				break;
 
-		// Export board button
-		if (event.target.id === 'export-board') {
-			// Track export action with Umami
-			if (window.umami) {
-				umami.track('Export Board');
-			}
-			BoardManager.exportBoard();
-		}
+			case 'delete-column':
+				BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
+				break;
 
-		// Import board button
-		if (event.target.id === 'import-board') {
-			// Track import action with Umami
-			if (window.umami) {
-				umami.track('Import Board');
-			}
-			BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
-		}
+			case 'clear-board':
+				BoardManager.clearBoard(board, columnTemplate, saveBoardWrapper);
+				break;
 
-		// GitHub button
-		if (event.target.id === 'github') {
-			// Track GitHub link click with Umami
-			if (window.umami) {
-				umami.track('GitHub Link');
-			}
-			window.location.href = 'https://github.com/AndrewOKC/Excaliban';
-		}
+			// Task Management
+			case 'add-task':
+				TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
+				break;
 
-		// Delete column button
-		if (event.target.id === 'delete-column') {
-			BoardManager.deleteColumn(event.target.closest('.column'), saveBoardWrapper);
-		}
+			case 'edit-task':
+				event.stopPropagation();
+				TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
+				break;
 
-		// Add task button
-		if (event.target.id === 'add-task') {
-			TaskManager.addTask(event.target.closest('.column'), taskTemplate, saveBoardWrapper);
-		}
+			case 'delete-task':
+				TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
+				break;
 
-		// Edit task button
-		if (event.target.id === 'edit-task') {
-			event.stopPropagation();
-			TaskManager.openTaskEditModal(taskEditModal, event.target.closest('.task'), colorOptions);
-		}
+			// Modal Controls
+			case 'close-edit-modal':
+			case 'cancel-edit-modal':
+				TaskManager.closeTaskEditModal(taskEditModal);
+				break;
 
-		// Delete task button
-		if (event.target.id === 'delete-task') {
-			TaskManager.deleteTask(event.target.closest('.task'), saveBoardWrapper);
-		}
+			// Export/Import/Github
+			case 'export-board':
+				if (window.umami) umami.track('Export Board');
+				BoardManager.exportBoard();
+				break;
 
-		// Close edit modal button
-		if (event.target.id === 'close-edit-modal') {
-			TaskManager.closeTaskEditModal(taskEditModal);
-		}
+			case 'import-board':
+				if (window.umami) umami.track('Import Board');
+				BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
+				break;
 
-		// Cancel edit modal button
-		if (event.target.id === 'cancel-edit-modal') {
-			TaskManager.closeTaskEditModal(taskEditModal);
+			case 'github':
+				if (window.umami) umami.track('GitHub Link');
+				window.location.href = 'https://github.com/AndrewOKC/Excaliban';
+				break;
 		}
 	});
 });
