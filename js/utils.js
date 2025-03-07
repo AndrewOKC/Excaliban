@@ -53,3 +53,42 @@ export function initViewportHeight() {
 	// Some mobile browsers need an update after page load is complete
 	window.addEventListener('load', setMobileHeight);
 }
+
+/**
+ * Gets the user's browser information in a more readable format
+ * @returns {Object} Object containing browser name and version
+ */
+export function getBrowserInfo() {
+	const userAgent = navigator.userAgent;
+	let browserName = 'Unknown';
+	let browserVersion = 'Unknown';
+
+	// Chrome, Edge (Chromium-based), Opera, Safari, Firefox detection
+	if (userAgent.indexOf('Chrome') > -1 && userAgent.indexOf('Edg') === -1 && userAgent.indexOf('OPR') === -1) {
+		browserName = 'Chrome';
+		const match = userAgent.match(/Chrome\/(\d+\.\d+)/);
+		if (match) browserVersion = match[1];
+	} else if (userAgent.indexOf('Edg') > -1) {
+		browserName = 'Edge';
+		const match = userAgent.match(/Edg\/(\d+\.\d+)/);
+		if (match) browserVersion = match[1];
+	} else if (userAgent.indexOf('OPR') > -1 || userAgent.indexOf('Opera') > -1) {
+		browserName = 'Opera';
+		const match = userAgent.match(/OPR\/(\d+\.\d+)/);
+		if (match) browserVersion = match[1];
+	} else if (userAgent.indexOf('Safari') > -1 && userAgent.indexOf('Chrome') === -1) {
+		browserName = 'Safari';
+		const match = userAgent.match(/Version\/(\d+\.\d+)/);
+		if (match) browserVersion = match[1];
+	} else if (userAgent.indexOf('Firefox') > -1) {
+		browserName = 'Firefox';
+		const match = userAgent.match(/Firefox\/(\d+\.\d+)/);
+		if (match) browserVersion = match[1];
+	}
+
+	return {
+		name: browserName,
+		version: browserVersion,
+		userAgent: userAgent, // Include full UA string for debugging/fallback
+	};
+}
