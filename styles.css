@@ -372,7 +372,7 @@ button:active {
 }
 
 .add-task {
-	flex: 0 0 36px;
+	min-height: 40px;
 	margin: var(--space-lg);
 	align-self: flex-start;
 }
