@@ -372,6 +372,7 @@ button:active {
 }
 
 .add-task {
+	flex: 0 0 36px;
 	margin: var(--space-lg);
 	align-self: flex-start;
 }
