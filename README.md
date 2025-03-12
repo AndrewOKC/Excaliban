@@ -1,7 +1,7 @@
 <a href="https://excalidban.com/" target="_blank" rel="noopener">
   <picture>
-    <source media="(prefers-color-scheme: dark)" alt="Excaliban" srcset="https://excaliban.com/meta/excaliban_github_cover.png" />
-    <img alt="Excaliban" src="https://excaliban.com/meta/excaliban_github_cover.png" />
+    <source media="(prefers-color-scheme: dark)" alt="Excaliban" srcset="https://excaliban.commeta/excaliban_github_cover.png" />
+    <img alt="Excaliban" src="https://excaliban.commeta/excaliban_github_cover.png" />
   </picture>
 </a>
 
@@ -18,11 +18,10 @@
   </h2>
 </div>
 
-
 <div align="center">
   <figure>
     <a href="https://excaliban.com" target="_blank" rel="noopener">
-      <img src="https://excaliban.com/meta/showcase_mac.png" alt="Mac PWA Showcase" />
+      <img src="https://excaliban.commeta/showcase_mac.png" alt="Mac PWA Showcase" />
     </a>
     <figcaption>
       <p align="center">
@@ -36,28 +35,28 @@
 
 Excaliban kanban boards support:
 
-- 🗃&nbsp;Multiple Boards.
-- 📚&nbsp;Task Colors.
-- 📢&nbsp;Task Priorities.
-- 📆&nbsp;Task Due Dates.
-- 💾&nbsp;Exports & Imports.
-- 💯&nbsp;Free & Open-Source.
-- ✍️&nbsp;Hand-drawn like style.
-- 🌓&nbsp;Dark mode.
-- 👅&nbsp;Localization.
+-   🗃&nbsp;Multiple Boards.
+-   📚&nbsp;Task Colors.
+-   📢&nbsp;Task Priorities.
+-   📆&nbsp;Task Due Dates.
+-   💾&nbsp;Exports & Imports.
+-   💯&nbsp;Free & Open-Source.
+-   ✍️&nbsp;Hand-drawn like style.
+-   🌓&nbsp;Dark mode.
+-   👅&nbsp;Localization.
 
 ## Excaliban.com
 
-The app hosted at [excaliban.com](https://excaliban.com/) is a minimal showcase. Its [source code](https://github.com/AndrewOKC/Excaliban) is part of this repository.
+The app hosted at [excaliban.com](https://excaliban.com) is a minimal showcase. Its [source code](https://github.com/AndrewOKC/Excaliban) is part of this repository.
 
 ## Mobile Support
 
-The application has already gone through some mobile optimizations. More optimizations are planned! Consider joining the [Discord Server](https://discord.gg/22SPJduh), and sending us suggestions on how we should continue optimizing. 
+The application has already gone through some mobile optimizations. More optimizations are planned! Consider joining the [Discord Server](https://discord.gg/22SPJduh), and sending us suggestions on how we should continue optimizing.
 
 <div align="left">
   <figure>
     <a href="https://excaliban.com" target="_blank" rel="noopener">
-      <img src="https://excaliban.com/meta/showcase_iphone.PNG" alt="Mobile Optimization  Showcase" width=300/>
+      <img src="https://excaliban.commeta/showcase_iphone.PNG" alt="Mobile Optimization  Showcase" width=300/>
     </a>
   </figure>
 </div>
