@@ -3,7 +3,7 @@
  */
 
 // Application version - update when releasing new versions
-export const APP_VERSION = "0.1.2";
+export const APP_VERSION = "0.1.3";
 
 import { initializeBoards, saveBoard } from "./storage.js";
 import { setupDragAndDrop } from "./drag-drop.js";
