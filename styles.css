@@ -168,6 +168,7 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: text; /* Use text cursor to indicate editability */
 }
 
 .column-controls {
@@ -264,7 +265,7 @@ h1 {
     background: var(--color-surface-dark);
     border-radius: var(--radius-md);
     padding: 12px;
-    cursor: move;
+    cursor: grab;
     position: relative;
     box-shadow: var(--shadow-normal);
     transition: box-shadow 0.2s, transform 0.1s;
@@ -313,6 +314,7 @@ h1 {
     padding-right: 30px; /* Make room for the buttons */
     margin-bottom: 6px;
     word-break: break-word;
+    cursor: text; /* Text cursor to indicate editability */
 }
 
 .task-footer {
@@ -643,6 +645,7 @@ button:active {
 /* Drag and drop states */
 .task.dragging {
     opacity: 0.5;
+    cursor: grabbing;
 }
 
 .task-list.drag-over {
