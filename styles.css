@@ -161,23 +161,6 @@ h1 {
     position: relative;
 }
 
-/* Column drag handle indicator - desktop only */
-@media (min-width: 1251px) {
-    .column-header::before {
-        content: "⠿";
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        font-size: 12px;
-        opacity: 0.6;
-        transition: opacity 0.2s ease;
-    }
-    
-    .column:hover .column-header::before {
-        opacity: 1;
-    }
-}
-
 .column-title {
     font-weight: normal;
     font-size: var(--font-large);
@@ -672,6 +655,10 @@ button:active {
     border: 2px dashed var(--color-accent);
     box-shadow: none;
     z-index: 10;
+}
+
+.column.dragging .column-header {
+    border-bottom: 2px dashed var(--color-accent);
 }
 
 .column-drag-over {
