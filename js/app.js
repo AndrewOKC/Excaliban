@@ -6,7 +6,7 @@
 export const APP_VERSION = "0.1.3";
 
 import { initializeBoards, saveBoard } from "./storage.js";
-import { setupDragAndDrop } from "./drag-drop.js";
+import { setupDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
 import { registerServiceWorker } from "./pwa.js";
 import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Drag and Drop Functionality : Setup
     setupDragAndDrop(board, saveBoardWrapper);
+    setupColumnDragAndDrop(board, saveBoardWrapper);
 
     // ContentEditable : Handle Focus Out (Saves Board on Exiting Editable Content)
     board.addEventListener("focusout", (event) => {

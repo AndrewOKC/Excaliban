@@ -61,6 +61,78 @@ export function setupDragAndDrop(board, saveBoardCallback) {
 }
 
 /**
+ * Set up drag and drop for columns
+ * @param {HTMLElement} board - The board element
+ * @param {Function} saveBoardCallback - Function to call when board is updated
+ */
+export function setupColumnDragAndDrop(board, saveBoardCallback) {
+	// Check if we're on mobile - disable column drag on smaller screens
+	const isMobileOrTablet = () => window.innerWidth <= 1250;
+
+	// Event delegation for column drag operations
+	board.addEventListener('dragstart', (e) => {
+		// Prevent dragging when clicking on editable content or buttons
+		if (e.target.isContentEditable || e.target.tagName === 'BUTTON') {
+			e.preventDefault();
+			return;
+		}
+		
+		// Don't allow column dragging on mobile/tablet
+		if (isMobileOrTablet()) {
+			e.preventDefault();
+			return;
+		}
+
+		const column = e.target.closest('.column');
+		if (column && !column.querySelector('.task.dragging')) {
+			column.classList.add('dragging');
+			e.dataTransfer.setData('text/plain', 'dragging-column');
+			// Set drag image to the column itself
+			e.dataTransfer.setDragImage(column, 20, 20);
+		}
+	});
+
+	board.addEventListener('dragend', (e) => {
+		const column = e.target.closest('.column');
+		if (column && column.classList.contains('dragging')) {
+			column.classList.remove('dragging');
+			saveBoardCallback();
+		}
+	});
+
+	board.addEventListener('dragover', (e) => {
+		e.preventDefault();
+		const draggingColumn = board.querySelector('.column.dragging');
+		
+		if (draggingColumn) {
+			// Only process column dragging if we're not dragging a task
+			if (!board.querySelector('.task.dragging')) {
+				const afterElement = getDragAfterColumn(board, e.clientX);
+				
+				if (afterElement && afterElement !== draggingColumn) {
+					// Determine if mouse is on the right side of the column
+					const rect = afterElement.getBoundingClientRect();
+					const afterMidpoint = rect.left + rect.width / 2;
+					
+					if (e.clientX < afterMidpoint) {
+						board.insertBefore(draggingColumn, afterElement);
+					} else {
+						const nextElement = afterElement.nextElementSibling;
+						if (nextElement) {
+							board.insertBefore(draggingColumn, nextElement);
+						} else {
+							board.appendChild(draggingColumn);
+						}
+					}
+				} else if (!afterElement && draggingColumn !== board.lastElementChild) {
+					board.appendChild(draggingColumn);
+				}
+			}
+		}
+	});
+}
+
+/**
  * Helper function to determine where to drop the dragged task
  * @param {HTMLElement} container - The task list container
  * @param {number} y - The current Y position of the mouse
@@ -76,6 +148,34 @@ function getDragAfterElement(container, y) {
 			const box = child.getBoundingClientRect();
 			const offset = y - box.top - box.height / 2;
 
+			if (offset < 0 && offset > closest.offset) {
+				return { offset: offset, element: child };
+			} else {
+				return closest;
+			}
+		},
+		{ offset: Number.NEGATIVE_INFINITY }
+	).element;
+}
+
+/**
+ * Helper function to determine where to drop the dragged column
+ * @param {HTMLElement} container - The board container
+ * @param {number} x - The current X position of the mouse
+ * @returns {HTMLElement|undefined} - The element to insert before
+ */
+function getDragAfterColumn(container, x) {
+	// Get all column elements that aren't currently being dragged
+	const draggableElements = [...container.querySelectorAll('.column:not(.dragging)')];
+	
+	if (draggableElements.length === 0) return undefined;
+	
+	// Find the column element that should come after the dragged element
+	return draggableElements.reduce(
+		(closest, child) => {
+			const box = child.getBoundingClientRect();
+			const offset = x - box.left - box.width / 2;
+			
 			if (offset < 0 && offset > closest.offset) {
 				return { offset: offset, element: child };
 			} else {

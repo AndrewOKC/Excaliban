@@ -161,6 +161,23 @@ h1 {
     position: relative;
 }
 
+/* Column drag handle indicator - desktop only */
+@media (min-width: 1251px) {
+    .column-header::before {
+        content: "⠿";
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 12px;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+    
+    .column:hover .column-header::before {
+        opacity: 1;
+    }
+}
+
 .column-title {
     font-weight: normal;
     font-size: var(--font-large);
@@ -649,6 +666,26 @@ button:active {
     background-color: var(--color-accent-transparent);
 }
 
+/* Column drag and drop states */
+.column.dragging {
+    opacity: 0.7;
+    border: 2px dashed var(--color-accent);
+    box-shadow: none;
+    z-index: 10;
+}
+
+.column-drag-over {
+    border-left: 3px solid var(--color-accent);
+}
+
+.column-header {
+    cursor: grab;
+}
+
+.column-header:active {
+    cursor: grabbing;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
@@ -706,6 +743,11 @@ button:active {
     .board::-webkit-scrollbar {
         display: none;
     }
+    
+    /* Disable column dragging visual cues on tablet */
+    .column-header {
+        cursor: default;
+    }
 }
 
 /* Mobile */
@@ -722,6 +764,12 @@ button:active {
 
     .app-container {
         padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-xl);
+    }
+    
+    /* Completely disable column dragging on mobile */
+    .column {
+        /* Override draggable attribute visually */
+        -webkit-user-drag: none;
     }
 
     .controls {
