@@ -7,131 +7,131 @@
  * @param {HTMLElement} board - The board element
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
-export function setupDragAndDrop(board, saveBoardCallback) {
-	let placeholder = null;
+export function setupTaskDragAndDrop(board, saveBoardCallback) {
+    let placeholder = null;
 
-	// Create placeholder element for task drop
-	function createPlaceholder() {
-		const div = document.createElement('div');
-		div.classList.add('task-drop-placeholder');
-		return div;
-	}
+    // Create placeholder element for task drop
+    function createPlaceholder() {
+        const div = document.createElement("div");
+        div.classList.add("task-drop-placeholder");
+        return div;
+    }
 
-	// Remove any existing placeholder
-	function removePlaceholder() {
-		if (placeholder && placeholder.parentNode) {
-			placeholder.parentNode.removeChild(placeholder);
-		}
-		placeholder = null;
-	}
+    // Remove any existing placeholder
+    function removePlaceholder() {
+        if (placeholder && placeholder.parentNode) {
+            placeholder.parentNode.removeChild(placeholder);
+        }
+        placeholder = null;
+    }
 
-	// Event delegation for dynamically added elements
-	board.addEventListener('dragstart', (e) => {
-		if (e.target.classList.contains('task')) {
-			e.target.classList.add('dragging');
-			e.dataTransfer.setData('text/plain', 'dragging-task');
-		}
-	});
+    // Event delegation for dynamically added elements
+    board.addEventListener("dragstart", (e) => {
+        if (e.target.classList.contains("task")) {
+            e.target.classList.add("dragging");
+            e.dataTransfer.setData("text/plain", "dragging-task");
+        }
+    });
 
-	board.addEventListener('dragend', (e) => {
-		if (e.target.classList.contains('task')) {
-			e.target.classList.remove('dragging');
-			removePlaceholder();
-			saveBoardCallback();
-		}
-	});
+    board.addEventListener("dragend", (e) => {
+        if (e.target.classList.contains("task")) {
+            e.target.classList.remove("dragging");
+            removePlaceholder();
+            saveBoardCallback();
+        }
+    });
 
-	// Throttle the dragover event to prevent excessive updates
-	let lastDragOverTime = 0;
-	const throttleMs = 50; // Only process every 50ms
+    // Throttle the dragover event to prevent excessive updates
+    let lastDragOverTime = 0;
+    const throttleMs = 50; // Only process every 50ms
 
-	board.addEventListener('dragover', (e) => {
-		e.preventDefault();
-		
-		// Throttle updates to improve performance
-		const now = Date.now();
-		if (now - lastDragOverTime < throttleMs) {
-			return;
-		}
-		lastDragOverTime = now;
+    board.addEventListener("dragover", (e) => {
+        e.preventDefault();
 
-		const draggingTask = document.querySelector('.task.dragging');
-		if (!draggingTask) return;
+        // Throttle updates to improve performance
+        const now = Date.now();
+        if (now - lastDragOverTime < throttleMs) {
+            return;
+        }
+        lastDragOverTime = now;
 
-		const taskList = e.target.closest('.task-list');
-		if (taskList) {
-			taskList.classList.add('drag-over');
-			
-			// Create placeholder if it doesn't exist
-			if (!placeholder) {
-				placeholder = createPlaceholder();
-			}
-			
-			// Find the closest task to drop position
-			const afterElement = getDragAfterElement(taskList, e.clientY);
-			
-			// Position the placeholder
-			if (placeholder.parentNode !== taskList) {
-				if (placeholder.parentNode) {
-					placeholder.parentNode.removeChild(placeholder);
-				}
-				
-				if (afterElement) {
-					taskList.insertBefore(placeholder, afterElement);
-				} else {
-					taskList.appendChild(placeholder);
-				}
-			} else if (afterElement) {
-				// Move placeholder to new position only if needed
-				const nextElement = placeholder.nextElementSibling;
-				if (nextElement !== afterElement) {
-					taskList.insertBefore(placeholder, afterElement);
-				}
-			} else if (placeholder !== taskList.lastElementChild) {
-				taskList.appendChild(placeholder);
-			}
-		} else {
-			removePlaceholder();
-		}
-	});
+        const draggingTask = document.querySelector(".task.dragging");
+        if (!draggingTask) return;
 
-	board.addEventListener('dragleave', (e) => {
-		if (e.target.classList.contains('task-list') && !e.target.contains(e.relatedTarget)) {
-			e.target.classList.remove('drag-over');
-			// Only remove placeholder if we're actually leaving the task list
-			if (!e.target.contains(e.relatedTarget)) {
-				removePlaceholder();
-			}
-		}
-	});
+        const taskList = e.target.closest(".task-list");
+        if (taskList) {
+            taskList.classList.add("drag-over");
 
-	board.addEventListener('drop', (e) => {
-		e.preventDefault();
+            // Create placeholder if it doesn't exist
+            if (!placeholder) {
+                placeholder = createPlaceholder();
+            }
 
-		const taskList = e.target.closest('.task-list');
-		if (taskList) {
-			taskList.classList.remove('drag-over');
-			const draggingTask = document.querySelector('.task.dragging');
+            // Find the closest task to drop position
+            const afterElement = getDragAfterTask(taskList, e.clientY);
 
-			if (draggingTask) {
-				// Insert at placeholder position
-				if (placeholder && placeholder.parentNode) {
-					taskList.insertBefore(draggingTask, placeholder);
-					removePlaceholder();
-				} else {
-					// Fallback to original logic
-					const afterElement = getDragAfterElement(taskList, e.clientY);
-					if (afterElement) {
-						taskList.insertBefore(draggingTask, afterElement);
-					} else {
-						taskList.appendChild(draggingTask);
-					}
-				}
+            // Position the placeholder
+            if (placeholder.parentNode !== taskList) {
+                if (placeholder.parentNode) {
+                    placeholder.parentNode.removeChild(placeholder);
+                }
 
-				saveBoardCallback();
-			}
-		}
-	});
+                if (afterElement) {
+                    taskList.insertBefore(placeholder, afterElement);
+                } else {
+                    taskList.appendChild(placeholder);
+                }
+            } else if (afterElement) {
+                // Move placeholder to new position only if needed
+                const nextElement = placeholder.nextElementSibling;
+                if (nextElement !== afterElement) {
+                    taskList.insertBefore(placeholder, afterElement);
+                }
+            } else if (placeholder !== taskList.lastElementChild) {
+                taskList.appendChild(placeholder);
+            }
+        } else {
+            removePlaceholder();
+        }
+    });
+
+    board.addEventListener("dragleave", (e) => {
+        if (e.target.classList.contains("task-list") && !e.target.contains(e.relatedTarget)) {
+            e.target.classList.remove("drag-over");
+            // Only remove placeholder if we're actually leaving the task list
+            if (!e.target.contains(e.relatedTarget)) {
+                removePlaceholder();
+            }
+        }
+    });
+
+    board.addEventListener("drop", (e) => {
+        e.preventDefault();
+
+        const taskList = e.target.closest(".task-list");
+        if (taskList) {
+            taskList.classList.remove("drag-over");
+            const draggingTask = document.querySelector(".task.dragging");
+
+            if (draggingTask) {
+                // Insert at placeholder position
+                if (placeholder && placeholder.parentNode) {
+                    taskList.insertBefore(draggingTask, placeholder);
+                    removePlaceholder();
+                } else {
+                    // Fallback to original logic
+                    const afterElement = getDragAfterTask(taskList, e.clientY);
+                    if (afterElement) {
+                        taskList.insertBefore(draggingTask, afterElement);
+                    } else {
+                        taskList.appendChild(draggingTask);
+                    }
+                }
+
+                saveBoardCallback();
+            }
+        }
+    });
 }
 
 /**
@@ -140,70 +140,70 @@ export function setupDragAndDrop(board, saveBoardCallback) {
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
 export function setupColumnDragAndDrop(board, saveBoardCallback) {
-	// Check if we're on mobile - disable column drag on smaller screens
-	const isMobileOrTablet = () => window.innerWidth <= 1250;
+    // Check if we're on mobile - disable column drag on smaller screens
+    const isMobileOrTablet = () => window.innerWidth <= 1250;
 
-	// Event delegation for column drag operations
-	board.addEventListener('dragstart', (e) => {
-		// Prevent dragging when clicking on editable content or buttons
-		if (e.target.isContentEditable || e.target.tagName === 'BUTTON') {
-			e.preventDefault();
-			return;
-		}
-		
-		// Don't allow column dragging on mobile/tablet
-		if (isMobileOrTablet()) {
-			e.preventDefault();
-			return;
-		}
+    // Event delegation for column drag operations
+    board.addEventListener("dragstart", (e) => {
+        // Prevent dragging when clicking on editable content or buttons
+        if (e.target.isContentEditable || e.target.tagName === "BUTTON") {
+            e.preventDefault();
+            return;
+        }
 
-		const column = e.target.closest('.column');
-		if (column && !column.querySelector('.task.dragging')) {
-			column.classList.add('dragging');
-			e.dataTransfer.setData('text/plain', 'dragging-column');
-			// Set drag image to the column itself
-			e.dataTransfer.setDragImage(column, 20, 20);
-		}
-	});
+        // Don't allow column dragging on mobile/tablet
+        if (isMobileOrTablet()) {
+            e.preventDefault();
+            return;
+        }
 
-	board.addEventListener('dragend', (e) => {
-		const column = e.target.closest('.column');
-		if (column && column.classList.contains('dragging')) {
-			column.classList.remove('dragging');
-			saveBoardCallback();
-		}
-	});
+        const column = e.target.closest(".column");
+        if (column && !column.querySelector(".task.dragging")) {
+            column.classList.add("dragging");
+            e.dataTransfer.setData("text/plain", "dragging-column");
+            // Set drag image to the column itself
+            e.dataTransfer.setDragImage(column, 20, 20);
+        }
+    });
 
-	board.addEventListener('dragover', (e) => {
-		e.preventDefault();
-		const draggingColumn = board.querySelector('.column.dragging');
-		
-		if (draggingColumn) {
-			// Only process column dragging if we're not dragging a task
-			if (!board.querySelector('.task.dragging')) {
-				const afterElement = getDragAfterColumn(board, e.clientX);
-				
-				if (afterElement && afterElement !== draggingColumn) {
-					// Determine if mouse is on the right side of the column
-					const rect = afterElement.getBoundingClientRect();
-					const afterMidpoint = rect.left + rect.width / 2;
-					
-					if (e.clientX < afterMidpoint) {
-						board.insertBefore(draggingColumn, afterElement);
-					} else {
-						const nextElement = afterElement.nextElementSibling;
-						if (nextElement) {
-							board.insertBefore(draggingColumn, nextElement);
-						} else {
-							board.appendChild(draggingColumn);
-						}
-					}
-				} else if (!afterElement && draggingColumn !== board.lastElementChild) {
-					board.appendChild(draggingColumn);
-				}
-			}
-		}
-	});
+    board.addEventListener("dragend", (e) => {
+        const column = e.target.closest(".column");
+        if (column && column.classList.contains("dragging")) {
+            column.classList.remove("dragging");
+            saveBoardCallback();
+        }
+    });
+
+    board.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        const draggingColumn = board.querySelector(".column.dragging");
+
+        if (draggingColumn) {
+            // Only process column dragging if we're not dragging a task
+            if (!board.querySelector(".task.dragging")) {
+                const afterElement = getDragAfterColumn(board, e.clientX);
+
+                if (afterElement && afterElement !== draggingColumn) {
+                    // Determine if mouse is on the right side of the column
+                    const rect = afterElement.getBoundingClientRect();
+                    const afterMidpoint = rect.left + rect.width / 2;
+
+                    if (e.clientX < afterMidpoint) {
+                        board.insertBefore(draggingColumn, afterElement);
+                    } else {
+                        const nextElement = afterElement.nextElementSibling;
+                        if (nextElement) {
+                            board.insertBefore(draggingColumn, nextElement);
+                        } else {
+                            board.appendChild(draggingColumn);
+                        }
+                    }
+                } else if (!afterElement && draggingColumn !== board.lastElementChild) {
+                    board.appendChild(draggingColumn);
+                }
+            }
+        }
+    });
 }
 
 /**
@@ -212,24 +212,24 @@ export function setupColumnDragAndDrop(board, saveBoardCallback) {
  * @param {number} y - The current Y position of the mouse
  * @returns {HTMLElement|undefined} - The element to insert before
  */
-function getDragAfterElement(container, y) {
-	// Get all task elements that aren't currently being dragged
-	const draggableElements = [...container.querySelectorAll('.task:not(.dragging)')];
+function getDragAfterTask(container, y) {
+    // Get all task elements that aren't currently being dragged
+    const draggableElements = [...container.querySelectorAll(".task:not(.dragging)")];
 
-	// Find the task element that should come after the dragged element
-	return draggableElements.reduce(
-		(closest, child) => {
-			const box = child.getBoundingClientRect();
-			const offset = y - box.top - box.height / 2;
+    // Find the task element that should come after the dragged element
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
 
-			if (offset < 0 && offset > closest.offset) {
-				return { offset: offset, element: child };
-			} else {
-				return closest;
-			}
-		},
-		{ offset: Number.NEGATIVE_INFINITY }
-	).element;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element;
 }
 
 /**
@@ -239,23 +239,23 @@ function getDragAfterElement(container, y) {
  * @returns {HTMLElement|undefined} - The element to insert before
  */
 function getDragAfterColumn(container, x) {
-	// Get all column elements that aren't currently being dragged
-	const draggableElements = [...container.querySelectorAll('.column:not(.dragging)')];
-	
-	if (draggableElements.length === 0) return undefined;
-	
-	// Find the column element that should come after the dragged element
-	return draggableElements.reduce(
-		(closest, child) => {
-			const box = child.getBoundingClientRect();
-			const offset = x - box.left - box.width / 2;
-			
-			if (offset < 0 && offset > closest.offset) {
-				return { offset: offset, element: child };
-			} else {
-				return closest;
-			}
-		},
-		{ offset: Number.NEGATIVE_INFINITY }
-	).element;
+    // Get all column elements that aren't currently being dragged
+    const draggableElements = [...container.querySelectorAll(".column:not(.dragging)")];
+
+    if (draggableElements.length === 0) return undefined;
+
+    // Find the column element that should come after the dragged element
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element;
 }

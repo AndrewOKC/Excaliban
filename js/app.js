@@ -3,10 +3,10 @@
  */
 
 // Application version - update when releasing new versions
-export const APP_VERSION = "0.1.3";
+export const APP_VERSION = "0.2.0";
 
 import { initializeBoards, saveBoard } from "./storage.js";
-import { setupDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
+import { setupTaskDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
 import { registerServiceWorker } from "./pwa.js";
 import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     TaskManager.setupTaskEditModal(taskEditModal, taskEditForm, colorOptions, saveBoardWrapper);
 
     // Drag and Drop Functionality : Setup
-    setupDragAndDrop(board, saveBoardWrapper);
+    setupTaskDragAndDrop(board, saveBoardWrapper);
     setupColumnDragAndDrop(board, saveBoardWrapper);
 
     // ContentEditable : Handle Focus Out (Saves Board on Exiting Editable Content)
