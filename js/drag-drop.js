@@ -8,6 +8,23 @@
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
 export function setupDragAndDrop(board, saveBoardCallback) {
+	let placeholder = null;
+
+	// Create placeholder element for task drop
+	function createPlaceholder() {
+		const div = document.createElement('div');
+		div.classList.add('task-drop-placeholder');
+		return div;
+	}
+
+	// Remove any existing placeholder
+	function removePlaceholder() {
+		if (placeholder && placeholder.parentNode) {
+			placeholder.parentNode.removeChild(placeholder);
+		}
+		placeholder = null;
+	}
+
 	// Event delegation for dynamically added elements
 	board.addEventListener('dragstart', (e) => {
 		if (e.target.classList.contains('task')) {
@@ -19,20 +36,72 @@ export function setupDragAndDrop(board, saveBoardCallback) {
 	board.addEventListener('dragend', (e) => {
 		if (e.target.classList.contains('task')) {
 			e.target.classList.remove('dragging');
+			removePlaceholder();
 			saveBoardCallback();
 		}
 	});
 
+	// Throttle the dragover event to prevent excessive updates
+	let lastDragOverTime = 0;
+	const throttleMs = 50; // Only process every 50ms
+
 	board.addEventListener('dragover', (e) => {
 		e.preventDefault();
-		if (e.target.classList.contains('task-list')) {
-			e.target.classList.add('drag-over');
+		
+		// Throttle updates to improve performance
+		const now = Date.now();
+		if (now - lastDragOverTime < throttleMs) {
+			return;
+		}
+		lastDragOverTime = now;
+
+		const draggingTask = document.querySelector('.task.dragging');
+		if (!draggingTask) return;
+
+		const taskList = e.target.closest('.task-list');
+		if (taskList) {
+			taskList.classList.add('drag-over');
+			
+			// Create placeholder if it doesn't exist
+			if (!placeholder) {
+				placeholder = createPlaceholder();
+			}
+			
+			// Find the closest task to drop position
+			const afterElement = getDragAfterElement(taskList, e.clientY);
+			
+			// Position the placeholder
+			if (placeholder.parentNode !== taskList) {
+				if (placeholder.parentNode) {
+					placeholder.parentNode.removeChild(placeholder);
+				}
+				
+				if (afterElement) {
+					taskList.insertBefore(placeholder, afterElement);
+				} else {
+					taskList.appendChild(placeholder);
+				}
+			} else if (afterElement) {
+				// Move placeholder to new position only if needed
+				const nextElement = placeholder.nextElementSibling;
+				if (nextElement !== afterElement) {
+					taskList.insertBefore(placeholder, afterElement);
+				}
+			} else if (placeholder !== taskList.lastElementChild) {
+				taskList.appendChild(placeholder);
+			}
+		} else {
+			removePlaceholder();
 		}
 	});
 
 	board.addEventListener('dragleave', (e) => {
-		if (e.target.classList.contains('task-list')) {
+		if (e.target.classList.contains('task-list') && !e.target.contains(e.relatedTarget)) {
 			e.target.classList.remove('drag-over');
+			// Only remove placeholder if we're actually leaving the task list
+			if (!e.target.contains(e.relatedTarget)) {
+				removePlaceholder();
+			}
 		}
 	});
 
@@ -45,13 +114,18 @@ export function setupDragAndDrop(board, saveBoardCallback) {
 			const draggingTask = document.querySelector('.task.dragging');
 
 			if (draggingTask) {
-				// Find the closest task to drop position
-				const afterElement = getDragAfterElement(taskList, e.clientY);
-
-				if (afterElement) {
-					taskList.insertBefore(draggingTask, afterElement);
+				// Insert at placeholder position
+				if (placeholder && placeholder.parentNode) {
+					taskList.insertBefore(draggingTask, placeholder);
+					removePlaceholder();
 				} else {
-					taskList.appendChild(draggingTask);
+					// Fallback to original logic
+					const afterElement = getDragAfterElement(taskList, e.clientY);
+					if (afterElement) {
+						taskList.insertBefore(draggingTask, afterElement);
+					} else {
+						taskList.appendChild(draggingTask);
+					}
 				}
 
 				saveBoardCallback();
