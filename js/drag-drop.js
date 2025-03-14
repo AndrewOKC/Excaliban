@@ -151,12 +151,6 @@ export function setupColumnDragAndDrop(board, saveBoardCallback) {
             return;
         }
 
-        // Don't allow column dragging on mobile/tablet
-        if (isMobileOrTablet()) {
-            e.preventDefault();
-            return;
-        }
-
         const column = e.target.closest(".column");
         if (column && !column.querySelector(".task.dragging")) {
             column.classList.add("dragging");
