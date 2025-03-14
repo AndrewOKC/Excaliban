@@ -11,6 +11,7 @@ import { registerServiceWorker } from "./pwa.js";
 import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
 import * as BoardManager from "./board-manager.js";
+import { initFeedback } from "./feedback.js";
 
 // Register service worker for PWA functionality
 registerServiceWorker();
@@ -18,6 +19,7 @@ registerServiceWorker();
 // Initialize viewport height for mobile devices
 initViewportHeight();
 
+// Wait for DOM to be loaded before initializing feedback
 document.addEventListener("DOMContentLoaded", () => {
     // DOM elements
     const board = document.getElementById("board");
@@ -51,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Board : Load Initial
     loadBoardWrapper(currentBoardId);
+    
+    // Initialize feedback component
+    initFeedback();
 
     // Board Dropdown : Populate Wrapper
     const populateDropdownWrapper = () => {

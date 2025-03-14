@@ -640,6 +640,32 @@ button:active {
     display: block;
 }
 
+/* Feedback component */
+.feedback-button {
+    position: fixed;
+    right: var(--space-sm);
+    bottom: 25%;
+    z-index: 90;
+    padding: var(--space-xs) var(--space-xs);
+    font-size: var(--font-small);
+    transform: rotate(-90deg);
+    transform-origin: right bottom;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: var(--shadow-normal);
+}
+
+.feedback-button:hover {
+    transform: rotate(-90deg) translateX(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+#feedback-modal textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: "Virgil", "Comic Sans MS", cursive;
+}
+
 /* ==========================================================================
    5. State & Animations
    ========================================================================== */
@@ -741,7 +767,10 @@ button:active {
     .board::-webkit-scrollbar {
         display: none;
     }
-    
+    .feedback-button {
+        display: none;
+    }
+
     /* Disable column dragging visual cues on tablet */
     .column-header {
         cursor: default;
@@ -763,7 +792,7 @@ button:active {
     .app-container {
         padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-xl);
     }
-    
+
     /* Completely disable column dragging on mobile */
     .column {
         /* Override draggable attribute visually */
