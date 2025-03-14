@@ -646,16 +646,21 @@ button:active {
 .task.dragging {
     opacity: 0.5;
     cursor: grabbing;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .task-list.drag-over {
     background-color: var(--color-accent-transparent);
+    transition: background-color 0.2s ease;
 }
 
 .task-drop-placeholder {
-    height: 20px;
+    border: 2px dashed var(--color-accent);
+    border-radius: var(--radius-md);
+    background-color: var(--color-accent-transparent);
     margin: 10px 0;
-    transition: height 0.15s ease;
+    transition: height 0.15s ease, opacity 0.2s ease;
+    opacity: 0.7;
 }
 
 /* Column drag and drop states */
@@ -681,6 +686,19 @@ button:active {
 .column-header:active {
     cursor: grabbing;
 }
+
+/* Task drop animation */
+.task-dropped {
+    animation: dropAnimation 0.3s ease-out;
+}
+
+@keyframes dropAnimation {
+    0% { transform: scale(1.05); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+/* Removed accessibility helper */
 
 /* Animations */
 @keyframes fadeIn {
