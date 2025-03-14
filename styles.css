@@ -159,6 +159,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    cursor: grab; /* Add grab cursor to indicate draggability */
 }
 
 .column-title {
@@ -394,6 +395,7 @@ button:active {
     font-size: var(--font-medium);
     padding: 0 var(--space-xs);
     position: absolute;
+    cursor: pointer; /* Add pointer cursor to indicate clickability */
 }
 
 .delete-column:hover,
