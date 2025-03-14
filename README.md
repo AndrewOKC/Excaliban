@@ -1,7 +1,7 @@
 <a href="https://excalidban.com/" target="_blank" rel="noopener">
   <picture>
-    <source media="(prefers-color-scheme: dark)" alt="Excaliban" srcset="https://excaliban.commeta/excaliban_github_cover.png" />
-    <img alt="Excaliban" src="https://excaliban.commeta/excaliban_github_cover.png" />
+    <source media="(prefers-color-scheme: dark)" alt="Excaliban" srcset="https://excaliban.com/meta/excaliban_github_cover.png" />
+    <img alt="Excaliban" src="https://excaliban.com/meta/excaliban_github_cover.png" />
   </picture>
 </a>
 
@@ -21,7 +21,7 @@
 <div align="center">
   <figure>
     <a href="https://excaliban.com" target="_blank" rel="noopener">
-      <img src="https://excaliban.commeta/showcase_mac.png" alt="Mac PWA Showcase" />
+      <img src="https://excaliban.com/meta/showcase_mac.png" alt="Mac PWA Showcase" />
     </a>
     <figcaption>
       <p align="center">
@@ -56,7 +56,7 @@ The application has already gone through some mobile optimizations. More optimiz
 <div align="left">
   <figure>
     <a href="https://excaliban.com" target="_blank" rel="noopener">
-      <img src="https://excaliban.commeta/showcase_iphone.PNG" alt="Mobile Optimization  Showcase" width=300/>
+      <img src="https://excaliban.com/meta/showcase_iphone.PNG" alt="Mobile Optimization  Showcase" width=300/>
     </a>
   </figure>
 </div>
