@@ -13,9 +13,11 @@ const urlsToCache = [
 	'/js/storage.js',
 	'/js/task-manager.js',
 	'/js/utils.js',
+	'/js/feedback.js',
 	'/manifest.json',
 	'/meta/192x192.png',
 	'/meta/512x512.png',
+	'/fonts/Virgil-Regular.woff2',
 ];
 
 // Install event - cache assets

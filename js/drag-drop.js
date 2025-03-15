@@ -43,7 +43,7 @@ export function setupTaskDragAndDrop(board, saveBoardCallback) {
 
     // Throttle the dragover event to prevent excessive updates
     let lastDragOverTime = 0;
-    const throttleMs = 50; // Only process every 50ms
+    const throttleMs = 100; // Only process every 50ms
 
     board.addEventListener("dragover", (e) => {
         e.preventDefault();
