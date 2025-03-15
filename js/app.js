@@ -31,9 +31,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskEditModal = document.getElementById("task-edit-modal");
     const colorOptions = document.querySelectorAll(".color-option");
     const taskEditForm = document.getElementById("task-edit-form");
+    
+    // Dropdown menu elements
+    const menuButton = document.getElementById("menu-button");
+    const dropdownMenu = document.getElementById("dropdown-menu");
 
     // Current active board
     let currentBoardId = initializeBoards();
+    
+    // Dropdown Menu Toggle
+    menuButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("show");
+        
+        // Toggle menu button appearance (optional - can be hamburger to X animation)
+        const menuLines = menuButton.querySelectorAll(".menu-line");
+        menuLines.forEach(line => line.classList.toggle("active"));
+    });
+    
+    // Close menu when clicking elsewhere
+    document.addEventListener("click", (e) => {
+        if (!dropdownMenu.contains(e.target) && e.target !== menuButton) {
+            dropdownMenu.classList.remove("show");
+            
+            // Reset menu button appearance
+            const menuLines = menuButton.querySelectorAll(".menu-line");
+            menuLines.forEach(line => line.classList.remove("active"));
+        }
+    });
 
     // Debounce timer for search
     let searchTimer = null;
@@ -109,19 +134,25 @@ document.addEventListener("DOMContentLoaded", () => {
         switch (targetId) {
             // Board Management
             case "new-board":
+            case "menu-new-board":
                 if (window.umami) umami.track("New Board");
                 BoardManager.createNewBoard(saveBoardWrapper, loadBoardWrapper, populateDropdownWrapper);
+                dropdownMenu.classList.remove("show");
                 break;
 
             case "rename-board":
+            case "menu-rename-board":
                 if (window.umami) umami.track("Rename Board");
                 BoardManager.renameBoard(currentBoardId, populateDropdownWrapper);
+                dropdownMenu.classList.remove("show");
                 break;
 
             case "delete-board":
+            case "menu-delete-board":
                 if (window.umami) umami.track("Delete Board");
                 const newId = BoardManager.deleteBoard(currentBoardId, loadBoardWrapper, populateDropdownWrapper);
                 if (newId) currentBoardId = newId;
+                dropdownMenu.classList.remove("show");
                 break;
 
             // Column Management
@@ -165,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Export/Import/Github
             case "export-board":
+            case "menu-export":
                 if (window.umami) umami.track("Export Board");
                 BoardManager.showExportModal();
                 break;
@@ -184,8 +216,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
 
             case "import-board":
+            case "menu-import":
                 if (window.umami) umami.track("Import Board");
                 BoardManager.importBoard(loadBoardWrapper, populateDropdownWrapper);
+                dropdownMenu.classList.remove("show");
                 break;
 
             case "github":

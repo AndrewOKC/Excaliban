@@ -98,41 +98,68 @@
     <body>
         <div class="app-container">
             <header>
-                <h1>Excaliban</h1>
-                <div class="controls">
-                    <div class="controls-left">
-                        <div class="search-container">
-                            <input type="text" id="search-tasks" placeholder="Search..." aria-label="Search tasks" />
+                <div class="header-left">
+                    <button id="menu-button" class="menu-button" aria-label="Open menu">
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
+                    </button>
+                    <h1>Excaliban</h1>
+
+                    <!-- Dropdown Menu -->
+                    <div id="dropdown-menu" class="dropdown-menu">
+                        <div class="menu-section">
+                            <div class="menu-item" id="menu-export">Export</div>
+                            <div class="menu-item" id="menu-import">Import</div>
                         </div>
-                    </div>
-                    <div class="controls-center">
-                        <div class="board-selector">
-                            <select id="board-dropdown" aria-label="Select board"></select>
-                            <div class="board-actions">
-                                <button id="new-board" title="Create new board" aria-label="Create new board">+</button>
-                                <button
-                                    id="rename-board"
-                                    title="Rename current board"
-                                    aria-label="Rename current board"
-                                >
-                                    ✏️
-                                </button>
-                                <button
-                                    id="delete-board"
-                                    title="Delete current board"
-                                    aria-label="Delete current board"
-                                >
-                                    🗑️
-                                </button>
+                        <div class="menu-divider"></div>
+                        <div class="menu-section">
+                            <div class="menu-section-header">
+                                <span>Board</span>
+                                <div class="board-icons">
+                                    <span id="menu-new-board" title="Create new board" aria-label="Create new board">
+                                        <svg width="18" height="18" viewBox="0 0 18 18">
+                                            <path d="M9 2v14M2 9h14" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+                                        </svg>
+                                    </span>
+                                    <span
+                                        id="menu-rename-board"
+                                        title="Rename current board"
+                                        aria-label="Rename current board"
+                                        >✏️</span
+                                    >
+                                    <span
+                                        id="menu-delete-board"
+                                        title="Delete current board"
+                                        aria-label="Delete current board"
+                                        >🗑️</span
+                                    >
+                                </div>
                             </div>
+                            <select id="board-dropdown" class="menu-board-select" aria-label="Select board"></select>
+                        </div>
+                        <div class="menu-divider"></div>
+                        <div class="menu-section">
+                            <a href="#" class="menu-item">About</a>
+                            <a href="#" class="menu-item">Blog</a>
+                            <a href="https://github.com/AndrewOKC/Excaliban" class="menu-item">GitHub</a>
                         </div>
                     </div>
+                </div>
+                <div class="controls">
+                    <div class="controls-left"></div>
                     <div class="controls-right">
                         <div class="board-controls">
+                            <div class="search-container">
+                                <input
+                                    type="text"
+                                    id="search-tasks"
+                                    placeholder="Search..."
+                                    aria-label="Search tasks"
+                                />
+                            </div>
                             <button id="add-column" aria-label="Add column">Add Column</button>
                             <button id="clear-board" aria-label="Clear board">Clear</button>
-                            <button id="export-board" aria-label="Export board">Export</button>
-                            <button id="import-board" aria-label="Import board">Import</button>
                             <button id="github" aria-label="View on GitHub">
                                 <svg height="20" viewBox="0 0 24 24" fill="white" width="20">
                                     <path
@@ -147,7 +174,7 @@
             </header>
 
             <!-- Export Modal -->
-            <div id="export-modal" class="modal" style="display: none;">
+            <div id="export-modal" class="modal" style="display: none">
                 <div class="modal-content">
                     <h2>Export Board</h2>
                     <div class="modal-body">
