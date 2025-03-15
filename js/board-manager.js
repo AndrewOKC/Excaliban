@@ -215,10 +215,18 @@ export function createNewBoard(saveBoardCallback, loadBoardCallback, populateDro
 		// Save current board first
 		saveBoardCallback();
 
-		// Create new board
+		// Create new board with timestamp
+		const timestamp = Date.now();
 		const newBoard = {
-			id: 'board-' + Date.now(),
+			id: 'board-' + timestamp,
 			name: boardName.trim(),
+			sourceType: 'local',
+			lastUpdated: timestamp,
+			schemaVersion: '1.0',
+			synced: false,
+			meta: {
+				favorite: false
+			},
 			data: null,
 		};
 
@@ -255,8 +263,9 @@ export function renameBoard(currentBoardId, populateDropdownCallback) {
 	const newName = prompt('Enter a new name for this board:', currentBoard.name);
 
 	if (newName && newName.trim() !== '') {
-		// Update board name
+		// Update board name and lastUpdated timestamp
 		currentBoard.name = newName.trim();
+		currentBoard.lastUpdated = Date.now();
 
 		// Save boards
 		localStorage.setItem('kanbanBoards', JSON.stringify(boards));
@@ -353,11 +362,28 @@ export function importBoard(loadBoardCallback, populateDropdownCallback) {
 					throw new Error('Invalid format');
 				}
 
+				// Update imported boards to match current schema if needed
+				const timestamp = Date.now();
+				const updatedImported = imported.map(board => {
+					// Ensure board has all the required schema properties
+					return {
+						...board,
+						sourceType: 'imported',
+						lastUpdated: timestamp,
+						schemaVersion: '1.0',
+						synced: false,
+						meta: {
+							favorite: false,
+							...(board.meta || {})
+						}
+					};
+				});
+
 				// Store imported boards
-				localStorage.setItem('kanbanBoards', JSON.stringify(imported));
+				localStorage.setItem('kanbanBoards', JSON.stringify(updatedImported));
 
 				// Update current board ID and reload
-				const newCurrentBoardId = imported[0].id;
+				const newCurrentBoardId = updatedImported[0].id;
 
 				// Update dropdown
 				populateDropdownCallback();

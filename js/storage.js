@@ -39,7 +39,17 @@ export function saveBoard(currentBoardId, board) {
 	// Save to localStorage - update the current board in the boards collection
 	const boards = JSON.parse(localStorage.getItem('kanbanBoards'));
 	const currentBoard = boards.find((board) => board.id === currentBoardId);
+	
+	// Update board data and lastUpdated timestamp
 	currentBoard.data = boardData;
+	currentBoard.lastUpdated = Date.now();
+	
+	// Ensure all required schema fields exist
+	if (!currentBoard.sourceType) currentBoard.sourceType = 'local';
+	if (!currentBoard.schemaVersion) currentBoard.schemaVersion = '1.0';
+	if (!currentBoard.synced) currentBoard.synced = false;
+	if (!currentBoard.meta) currentBoard.meta = { favorite: false };
+	else if (!currentBoard.meta.hasOwnProperty('favorite')) currentBoard.meta.favorite = false;
 
 	localStorage.setItem('kanbanBoards', JSON.stringify(boards));
 }
@@ -50,9 +60,17 @@ export function saveBoard(currentBoardId, board) {
  */
 export function initializeBoards() {
 	if (!localStorage.getItem('kanbanBoards')) {
+		const timestamp = Date.now();
 		const initialBoard = {
-			id: 'board-' + Date.now(),
+			id: 'board-' + timestamp,
 			name: 'My First Board',
+			sourceType: 'local',
+			lastUpdated: timestamp,
+			schemaVersion: '1.0',
+			synced: false,
+			meta: {
+				favorite: false
+			},
 			data: null,
 		};
 
