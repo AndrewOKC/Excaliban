@@ -666,6 +666,47 @@ button:active {
     font-family: "Virgil", "Comic Sans MS", cursive;
 }
 
+/* Export Modal */
+#export-modal .modal-body {
+    text-align: center;
+}
+
+#export-modal .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+#export-modal button {
+    padding: var(--space-md) var(--space-lg);
+    font-family: "Virgil", "Comic Sans MS", cursive;
+    cursor: pointer;
+    font-size: var(--font-normal);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-normal);
+}
+
+#export-modal button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+#export-current, #export-all {
+    background-color: var(--color-accent);
+    color: white;
+    border: 2px solid white;
+    border-radius: var(--radius-md);
+}
+
+#close-export-modal {
+    background-color: var(--color-surface-light);
+    color: white;
+    border: 2px solid var(--color-surface-light);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-sm);
+}
+
 /* ==========================================================================
    5. State & Animations
    ========================================================================== */

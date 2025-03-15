@@ -317,22 +317,54 @@ export function deleteBoard(currentBoardId, loadBoardCallback, populateDropdownC
 }
 
 /**
- * Export all boards to a JSON file
+ * Show the export modal
  */
-export function exportBoard() {
+export function showExportModal() {
+	const exportModal = document.getElementById('export-modal');
+	exportModal.style.display = 'flex';
+}
+
+/**
+ * Close the export modal
+ */
+export function closeExportModal() {
+	const exportModal = document.getElementById('export-modal');
+	exportModal.style.display = 'none';
+}
+
+/**
+ * Export boards to a JSON file
+ * @param {string} exportType - 'current' for current board only, 'all' for all boards
+ * @param {string} currentBoardId - ID of the current board
+ */
+export function exportBoard(exportType = 'all', currentBoardId = null) {
 	// Get all boards
 	const boards = getAllBoards();
-
-	// Create a download file
-	const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(boards));
+	let dataToExport;
+	let filename;
+	
+	if (exportType === 'current' && currentBoardId) {
+		const currentBoard = boards.find(board => board.id === currentBoardId);
+		dataToExport = [currentBoard]; // Array with single board
+		filename = `excaliban_board_${currentBoard.name.replace(/\s+/g, '_')}.json`;
+	} else {
+		dataToExport = boards;
+		filename = 'excaliban_all_boards.json';
+	}
+	
+	// Create download file
+	const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(dataToExport));
 	const downloadAnchorNode = document.createElement('a');
 	downloadAnchorNode.setAttribute('href', dataStr);
-	downloadAnchorNode.setAttribute('download', 'excaliban_boards.json');
+	downloadAnchorNode.setAttribute('download', filename);
 	document.body.appendChild(downloadAnchorNode);
 	downloadAnchorNode.click();
 	downloadAnchorNode.remove();
-
-	showNotification('Boards exported successfully');
+	
+	// Close the modal
+	closeExportModal();
+	
+	showNotification(`Board${exportType === 'all' ? 's' : ''} exported successfully`);
 }
 
 /**
@@ -362,12 +394,27 @@ export function importBoard(loadBoardCallback, populateDropdownCallback) {
 					throw new Error('Invalid format');
 				}
 
-				// Update imported boards to match current schema if needed
+				// Get existing boards
+				const existingBoards = getAllBoards();
+				const existingNames = existingBoards.map(board => board.name);
+				
+				// Process imported boards with new IDs and timestamps
 				const timestamp = Date.now();
-				const updatedImported = imported.map(board => {
-					// Ensure board has all the required schema properties
+				const processedImported = imported.map((board, index) => {
+					// Create new ID to avoid conflicts
+					const newId = `board-${timestamp + index}`;
+					
+					// Check for name conflicts and append "(Imported)" if needed
+					let newName = board.name;
+					if (existingNames.includes(newName)) {
+						newName = `${newName} (Imported)`;
+					}
+					
+					// Return updated board
 					return {
 						...board,
+						id: newId,
+						name: newName,
 						sourceType: 'imported',
 						lastUpdated: timestamp,
 						schemaVersion: '1.0',
@@ -378,20 +425,22 @@ export function importBoard(loadBoardCallback, populateDropdownCallback) {
 						}
 					};
 				});
-
-				// Store imported boards
-				localStorage.setItem('kanbanBoards', JSON.stringify(updatedImported));
-
-				// Update current board ID and reload
-				const newCurrentBoardId = updatedImported[0].id;
+				
+				// Merge boards (add imported to existing)
+				const mergedBoards = [...existingBoards, ...processedImported];
+				
+				// Save merged boards
+				localStorage.setItem('kanbanBoards', JSON.stringify(mergedBoards));
 
 				// Update dropdown
 				populateDropdownCallback();
 
-				// Load selected board
-				loadBoardCallback(newCurrentBoardId);
+				// Load first imported board
+				if (processedImported.length > 0) {
+					loadBoardCallback(processedImported[0].id);
+				}
 
-				showNotification('Boards imported successfully');
+				showNotification(`${processedImported.length} board(s) imported successfully`);
 			} catch (err) {
 				showNotification('Error importing boards: ' + err.message, true);
 			}

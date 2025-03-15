@@ -146,6 +146,21 @@
                 <div id="notification" class="notification" role="alert"></div>
             </header>
 
+            <!-- Export Modal -->
+            <div id="export-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h2>Export Board</h2>
+                    <div class="modal-body">
+                        <p>Choose what to export:</p>
+                        <div class="modal-buttons">
+                            <button id="export-current">Current Board</button>
+                            <button id="export-all">All Boards</button>
+                            <button id="close-export-modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <main id="board" class="board">
                 <!-- Columns will be added here dynamically -->
             </main>

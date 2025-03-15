@@ -166,7 +166,21 @@ document.addEventListener("DOMContentLoaded", () => {
             // Export/Import/Github
             case "export-board":
                 if (window.umami) umami.track("Export Board");
-                BoardManager.exportBoard();
+                BoardManager.showExportModal();
+                break;
+                
+            case "export-current":
+                if (window.umami) umami.track("Export Current Board");
+                BoardManager.exportBoard('current', currentBoardId);
+                break;
+                
+            case "export-all":
+                if (window.umami) umami.track("Export All Boards");
+                BoardManager.exportBoard('all');
+                break;
+                
+            case "close-export-modal":
+                BoardManager.closeExportModal();
                 break;
 
             case "import-board":
