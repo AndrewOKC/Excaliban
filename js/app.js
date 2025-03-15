@@ -129,7 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Button Click : Event Listener (Using switch/case)
     document.addEventListener("click", (event) => {
-        const targetId = event.target.id;
+        // Get the clicked element or its closest parent with an ID
+        const target = event.target;
+        const targetElement = target.id ? target : target.closest('[id]');
+        const targetId = targetElement ? targetElement.id : '';
 
         switch (targetId) {
             // Board Management
