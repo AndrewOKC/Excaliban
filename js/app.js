@@ -3,7 +3,7 @@
  */
 
 // Application version - update when releasing new versions
-export const APP_VERSION = "0.2.0";
+export const APP_VERSION = "0.3.0";
 export const SCHEMA_VERSION = "1.0";
 
 import { initializeBoards, saveBoard } from "./storage.js";
@@ -31,32 +31,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskEditModal = document.getElementById("task-edit-modal");
     const colorOptions = document.querySelectorAll(".color-option");
     const taskEditForm = document.getElementById("task-edit-form");
-    
+
     // Dropdown menu elements
     const menuButton = document.getElementById("menu-button");
     const dropdownMenu = document.getElementById("dropdown-menu");
 
     // Current active board
     let currentBoardId = initializeBoards();
-    
+
     // Dropdown Menu Toggle
     menuButton.addEventListener("click", (e) => {
         e.stopPropagation();
         dropdownMenu.classList.toggle("show");
-        
+
         // Toggle menu button appearance (optional - can be hamburger to X animation)
         const menuLines = menuButton.querySelectorAll(".menu-line");
-        menuLines.forEach(line => line.classList.toggle("active"));
+        menuLines.forEach((line) => line.classList.toggle("active"));
     });
-    
+
     // Close menu when clicking elsewhere
     document.addEventListener("click", (e) => {
         if (!dropdownMenu.contains(e.target) && e.target !== menuButton) {
             dropdownMenu.classList.remove("show");
-            
+
             // Reset menu button appearance
             const menuLines = menuButton.querySelectorAll(".menu-line");
-            menuLines.forEach(line => line.classList.remove("active"));
+            menuLines.forEach((line) => line.classList.remove("active"));
         }
     });
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Board : Load Initial
     loadBoardWrapper(currentBoardId);
-    
+
     // Initialize feedback component
     initFeedback();
 
@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", (event) => {
         // Get the clicked element or its closest parent with an ID
         const target = event.target;
-        const targetElement = target.id ? target : target.closest('[id]');
-        const targetId = targetElement ? targetElement.id : '';
+        const targetElement = target.id ? target : target.closest("[id]");
+        const targetId = targetElement ? targetElement.id : "";
 
         switch (targetId) {
             // Board Management
@@ -203,17 +203,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (window.umami) umami.track("Export Board");
                 BoardManager.showExportModal();
                 break;
-                
+
             case "export-current":
                 if (window.umami) umami.track("Export Current Board");
-                BoardManager.exportBoard('current', currentBoardId);
+                BoardManager.exportBoard("current", currentBoardId);
                 break;
-                
+
             case "export-all":
                 if (window.umami) umami.track("Export All Boards");
-                BoardManager.exportBoard('all');
+                BoardManager.exportBoard("all");
                 break;
-                
+
             case "close-export-modal":
                 BoardManager.closeExportModal();
                 break;
