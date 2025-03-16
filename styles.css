@@ -940,9 +940,6 @@ button:active {
         max-height: calc(100vh - 150px);
         height: calc((var(--vh, 1vh) * 100) - 150px);
         max-height: calc((var(--vh, 1vh) * 100) - 150px);
-    }
-    /* Board layout */
-    .board {
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE and Edge */
     }
@@ -950,13 +947,9 @@ button:active {
     .board::-webkit-scrollbar {
         display: none;
     }
+
     .feedback-button {
         display: none;
-    }
-
-    /* Disable column dragging visual cues on tablet */
-    .column-header {
-        cursor: default;
     }
 }
 
@@ -975,13 +968,6 @@ button:active {
     h1 {
         margin-right: 0;
     }
-
-    /* .dropdown-menu {
-        width: 100%;
-        left: 0;
-        position: relative;
-        margin-top: var(--space-lg);
-    } */
 
     .app-container {
         padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-xl);
@@ -1013,17 +999,13 @@ button:active {
         display: none;
     }
 
-    .search-container {
-        width: 100%;
-    }
-
     .board-selector {
         width: 100%;
     }
 
-    /* #board-dropdown {
+    #board-dropdown {
         width: calc(100% - 110px);
-    } */
+    }
 
     .column {
         min-width: 250px;
