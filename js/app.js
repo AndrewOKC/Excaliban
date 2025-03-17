@@ -8,7 +8,7 @@ export const SCHEMA_VERSION = "1.0";
 
 import { initializeBoards, saveBoard } from "./storage.js";
 import { setupTaskDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
-import { registerServiceWorker } from "./pwa.js";
+import { initServiceWorker } from "./pwa.js";
 import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
 import * as BoardManager from "./board-manager.js";
@@ -28,13 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("dropdown-menu");
     const boardDropdown = document.getElementById("board-dropdown");
 
-    // Register service worker for PWA functionality
-    registerServiceWorker();
-
-    // Initialize viewport height for mobile devices
+    // Initializers
+    initServiceWorker();
     initViewportHeight();
-
-    // Initialize feedback component
     initFeedback();
 
     // Current active board
@@ -216,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 TaskManager.closeTaskEditModal(taskEditModal);
                 break;
 
+            // Github Links
             case "github":
                 if (window.umami) umami.track("GitHub Link");
                 window.location.href = "https://github.com/AndrewOKC/Excaliban";
