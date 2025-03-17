@@ -204,6 +204,14 @@ h1 {
     animation: fadeIn 0.2s ease-out;
 }
 
+.mobile-menu-section {
+    display: none;
+}
+
+.mobile-menu-divider {
+    display: none;
+}
+
 .menu-section {
     margin-bottom: var(--space-md);
 }
@@ -211,7 +219,7 @@ h1 {
 .menu-divider {
     height: 2px;
     background-color: var(--color-surface-light);
-    margin: var(--space-md) 0;
+    margin: var(--space-xl) 0;
 }
 
 .menu-item {
@@ -739,8 +747,10 @@ button:active {
     box-shadow: var(--shadow-large);
     position: relative;
 }
-
-.close-edit-modal {
+.task-edit-modal {
+    display: none;
+}
+.close-task-edit-modal {
     position: absolute;
     top: var(--space-md);
     right: var(--space-lg);
@@ -749,7 +759,7 @@ button:active {
     color: var(--color-text);
 }
 
-.close-edit-modal:hover {
+.close-task-edit-modal:hover {
     color: var(--color-priority-high);
 }
 
@@ -833,15 +843,15 @@ button:active {
     box-shadow: var(--shadow-hover);
 }
 
-#export-current,
-#export-all {
+#export-modal-current,
+#export-modal-all {
     background-color: var(--color-accent);
     color: white;
     border: 2px solid white;
     border-radius: var(--radius-md);
 }
 
-#close-export-modal {
+#export-modal-close {
     background-color: var(--color-surface-light);
     color: white;
     border: 2px solid var(--color-surface-light);
@@ -995,16 +1005,12 @@ button:active {
         justify-content: flex-start;
     }
 
-    .search-container {
+    #tablet-desktop-search {
         display: none;
     }
 
     .board-selector {
         width: 100%;
-    }
-
-    #board-dropdown {
-        width: calc(100% - 110px);
     }
 
     .column {
@@ -1029,5 +1035,20 @@ button:active {
         /* Mobile-friendly viewport height using CSS custom property */
         height: calc((var(--vh, 1vh) * 100) - 195px);
         max-height: calc((var(--vh, 1vh) * 100) - 195px);
+    }
+
+    .mobile-menu-section {
+        margin-bottom: var(--space-md);
+        display: flex;
+        align-items: center; /* Vertical alignment */
+        justify-content: center; /* Horizontal alignment */
+        flex-direction: column; /* Optional: if you want vertical stacking */
+    }
+
+    .mobile-menu-divider {
+        height: 2px;
+        background-color: var(--color-surface-light);
+        margin: var(--space-xl) 0;
+        display: block;
     }
 }

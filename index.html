@@ -108,6 +108,17 @@
 
                     <!-- Dropdown Menu -->
                     <div id="dropdown-menu" class="dropdown-menu">
+                        <div class="mobile-menu-section">
+                            <div id="" class="search-container">
+                                <input
+                                    type="text"
+                                    id="search-tasks"
+                                    placeholder="Search..."
+                                    aria-label="Search tasks"
+                                />
+                            </div>
+                        </div>
+                        <div class="mobile-menu-divider"></div>
                         <div class="menu-section">
                             <div class="menu-item" id="menu-export">Export</div>
                             <div class="menu-item" id="menu-import">Import</div>
@@ -155,7 +166,7 @@
                     <div class="controls-left"></div>
                     <div class="controls-right">
                         <div class="board-controls">
-                            <div class="search-container">
+                            <div id="tablet-desktop-search" class="search-container">
                                 <input
                                     type="text"
                                     id="search-tasks"
@@ -185,9 +196,9 @@
                     <div class="modal-body">
                         <p>Choose what to export:</p>
                         <div class="modal-buttons">
-                            <button id="export-current">Current Board</button>
-                            <button id="export-all">All Boards</button>
-                            <button id="close-export-modal">Cancel</button>
+                            <button id="export-modal-current">Current Board</button>
+                            <button id="export-modal-all">All Boards</button>
+                            <button id="export-modal-close">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -229,7 +240,7 @@
         <!-- Task Edit Modal -->
         <div id="task-edit-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <div class="modal-content">
-                <span class="close-edit-modal" id="close-edit-modal" aria-label="Close">&times;</span>
+                <span class="close-task-edit-modal" id="close-task-edit-modal" aria-label="Close">&times;</span>
                 <h3 id="modal-title">Edit Task</h3>
                 <form id="task-edit-form">
                     <div class="form-group">
@@ -265,7 +276,7 @@
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="button" id="cancel-edit-modal" class="secondary-button">Cancel</button>
+                        <button type="button" id="cancel-task-edit-modal" class="secondary-button">Cancel</button>
                         <button type="submit" id="save-task-edit">Save</button>
                     </div>
                 </form>
