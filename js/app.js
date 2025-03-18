@@ -6,7 +6,7 @@
 export const APP_VERSION = "0.3.0";
 export const SCHEMA_VERSION = "1.0";
 
-import { initializeBoards, saveBoard } from "./storage.js";
+import { initBoards, saveBoard } from "./storage.js";
 import { setupTaskDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
 import { initServiceWorker } from "./pwa.js";
 import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFeedback();
 
     // Current active board
-    let currentBoardId = initializeBoards();
+    let currentBoardId = initBoards();
 
     // Debounce timer for search
     let searchTimer = null;
