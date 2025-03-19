@@ -140,9 +140,6 @@ export function setupTaskDragAndDrop(board, saveBoardCallback) {
  * @param {Function} saveBoardCallback - Function to call when board is updated
  */
 export function setupColumnDragAndDrop(board, saveBoardCallback) {
-    // Check if we're on mobile - disable column drag on smaller screens
-    const isMobileOrTablet = () => window.innerWidth <= 1250;
-
     // Event delegation for column drag operations
     board.addEventListener("dragstart", (e) => {
         // Prevent dragging when clicking on editable content or buttons
@@ -151,11 +148,15 @@ export function setupColumnDragAndDrop(board, saveBoardCallback) {
             return;
         }
 
+        // Finds the closest column to the target
         const column = e.target.closest(".column");
+
+        // Checks if Column exists and makes sure that element being dragged is not a task
         if (column && !column.querySelector(".task.dragging")) {
+            // Add dragging class to the column
             column.classList.add("dragging");
-            e.dataTransfer.setData("text/plain", "dragging-column");
-            // Set drag image to the column itself
+
+            // Set drag image to follow the cursor
             e.dataTransfer.setDragImage(column, 20, 20);
         }
     });
