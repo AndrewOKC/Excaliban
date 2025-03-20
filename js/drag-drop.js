@@ -155,24 +155,32 @@ export function setupColumnDragAndDrop(board, saveBoardCallback) {
         if (column && !column.querySelector(".task.dragging")) {
             // Add dragging class to the column
             column.classList.add("dragging");
-
             // Set drag image to follow the cursor
             e.dataTransfer.setDragImage(column, 20, 20);
         }
     });
 
+    // TODO: Review Code
     board.addEventListener("dragend", (e) => {
+        // Finds the closest column to the target
         const column = e.target.closest(".column");
+
+        // Checks if Column exists and makes sure that element being dragged is not a task
         if (column && column.classList.contains("dragging")) {
+            // Remove dragging class from the column
             column.classList.remove("dragging");
+            // Save the board state
             saveBoardCallback();
         }
     });
 
+    // TODO: Review Code
     board.addEventListener("dragover", (e) => {
         e.preventDefault();
+        // Finds the column element that is currently being dragged
         const draggingColumn = board.querySelector(".column.dragging");
 
+        // Checks if Column exists
         if (draggingColumn) {
             // Only process column dragging if we're not dragging a task
             if (!board.querySelector(".task.dragging")) {
