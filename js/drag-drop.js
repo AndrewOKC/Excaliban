@@ -160,7 +160,6 @@ export function setupColumnDragAndDrop(board, saveBoardCallback) {
         }
     });
 
-    // TODO: Review Code
     board.addEventListener("dragend", (e) => {
         // Finds the closest column to the target
         const column = e.target.closest(".column");
