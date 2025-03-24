@@ -9,7 +9,7 @@ export const SCHEMA_VERSION = "1.0";
 import { initBoards, saveBoard } from "./storage.js";
 import { setupTaskDragAndDrop, setupColumnDragAndDrop } from "./drag-drop.js";
 import { initServiceWorker } from "./pwa.js";
-import { showNotification, initViewportHeight, getBrowserInfo } from "./utils.js";
+import { initViewportHeight } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
 import * as BoardManager from "./board-manager.js";
 import { initFeedback } from "./feedback.js";
