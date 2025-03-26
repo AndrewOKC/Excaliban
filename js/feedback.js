@@ -139,7 +139,7 @@ async function submitFeedback(message) {
     });
 
     if (!response.ok) {
-        throw new Error("Failed to submit feedback");
+        throw new Error("Failed to submit feedback!");
     }
 
     return await response.json();
