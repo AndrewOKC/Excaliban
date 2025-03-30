@@ -37,7 +37,7 @@
             src="https://umami.emeraldspawn.com/script.js"
             data-website-id="fdd6a8c3-a768-4953-a94a-034d598cde6c"
         ></script>
-        <link rel="preload" href="fonts/Virgil-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/Virgil-Regular.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <link rel="icon" href="meta/48x48.png" type="image/png" sizes="48x48" />
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="controls">
+                <div class="header-right">
                     <div class="controls-right">
                         <div class="board-controls">
                             <div id="tablet-desktop-search" class="search-container">
@@ -188,21 +188,6 @@
                 </div>
                 <div id="notification" class="notification" role="alert"></div>
             </header>
-
-            <!-- Export Modal -->
-            <div id="export-modal" class="modal" style="display: none">
-                <div class="modal-content">
-                    <h2>Export Board</h2>
-                    <div class="modal-body">
-                        <p>Choose what to export:</p>
-                        <div class="modal-buttons">
-                            <button id="export-modal-current">Current Board</button>
-                            <button id="export-modal-all">All Boards</button>
-                            <button id="export-modal-close">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <main id="board" class="board">
                 <!-- Columns will be added here dynamically -->
@@ -280,6 +265,21 @@
                         <button type="submit" id="save-task-edit">Save</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Export Modal -->
+        <div id="export-modal" class="modal" style="display: none">
+            <div class="modal-content">
+                <h2>Export Board</h2>
+                <div class="modal-body">
+                    <p>Choose what to export:</p>
+                    <div class="modal-buttons">
+                        <button id="export-modal-current">Current Board</button>
+                        <button id="export-modal-all">All Boards</button>
+                        <button id="export-modal-close">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
 

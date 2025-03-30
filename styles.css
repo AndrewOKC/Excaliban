@@ -345,8 +345,8 @@ h1 {
     display: none;
 }
 
-/* Header controls */
-.controls {
+/* Header Right */
+.header-right {
     display: flex;
     align-items: center;
     gap: var(--space-xxl);
@@ -939,7 +939,7 @@ button:active {
         font-size: 2.5rem;
     }
 
-    .controls {
+    .header-right {
         gap: var(--space-xl);
     }
 
@@ -991,7 +991,7 @@ button:active {
         -webkit-user-drag: none;
     }
 
-    .controls {
+    .header-right {
         display: flex;
         flex-direction: column;
         align-items: stretch;
