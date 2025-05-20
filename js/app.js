@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
         searchTimer = setTimeout(() => {
             const searchTerm = e.target.value.toLowerCase().trim();
             
-            // Sync the other search input value if both inputs exist
-            if (e.target === searchInputMobile && searchInputDesktop) {
+            // Sync the other search input value
+            if (e.target === searchInputMobile) {
                 searchInputDesktop.value = searchTerm;
-            } else if (searchInputMobile) {
+            } else {
                 searchInputMobile.value = searchTerm;
             }
             
@@ -58,13 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     };
 
-    // Search : Handle Input for both search fields (with null checks)
-    if (searchInputMobile) {
-        searchInputMobile.addEventListener("input", handleSearchInput);
-    }
-    if (searchInputDesktop) {
-        searchInputDesktop.addEventListener("input", handleSearchInput);
-    }
+    // Search : Handle Input for both search fields
+    searchInputMobile.addEventListener("input", handleSearchInput);
+    searchInputDesktop.addEventListener("input", handleSearchInput);
 
     // Dropdown Menu Toggle
     menuButton.addEventListener("click", (e) => {
