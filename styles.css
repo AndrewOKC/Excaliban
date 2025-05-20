@@ -206,11 +206,11 @@ h1 {
     animation: fadeIn 0.2s ease-out;
 }
 
-.mobile-menu-section {
+.menu-section-mobile {
     display: none;
 }
 
-.mobile-menu-divider {
+.menu-divider-mobile {
     display: none;
 }
 
@@ -349,36 +349,10 @@ h1 {
 .header-right {
     display: flex;
     align-items: center;
-    gap: var(--space-xxl);
+    gap: var(--space-md);
     flex-wrap: nowrap;
-    flex-shrink: 0; /* Don't allow controls to shrink */
+    overflow: visible;
 }
-
-.controls-left,
-.controls-center,
-.controls-right {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    flex-shrink: 0; /* Prevent all sections from shrinking */
-}
-
-/* Left controls (search) */
-.controls-left {
-    width: 200px; /* Fixed width for search */
-}
-
-/* Center controls (board selector) */
-.controls-center {
-    width: 220px; /* Fixed width for board dropdown */
-}
-
-/* Right controls (action buttons) */
-.controls-right {
-    display: flex;
-    justify-content: flex-end;
-}
-
 /* Remove duplicate rule */
 
 .search-container {
@@ -391,21 +365,6 @@ h1 {
     align-items: center;
     width: 220px;
     flex-wrap: nowrap;
-}
-
-.board-actions {
-    display: flex;
-    margin-left: var(--space-xs);
-    gap: var(--space-xs);
-    flex-shrink: 0;
-}
-
-.board-controls {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: var(--space-md);
-    overflow: visible;
-    white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -640,16 +599,6 @@ button:active {
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 1;
-}
-
-.board-actions button {
-    width: 28px;
-    height: 40px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
 }
 
 .form-group {
@@ -939,14 +888,6 @@ button:active {
         font-size: 2.5rem;
     }
 
-    .header-right {
-        gap: var(--space-xl);
-    }
-
-    .controls-left {
-        display: none;
-    }
-
     .board {
         height: calc(100vh - 150px);
         max-height: calc(100vh - 150px);
@@ -993,21 +934,12 @@ button:active {
 
     .header-right {
         display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: var(--space-lg);
+        align-items: center;
+        gap: var(--space-xs);
         width: 100%;
     }
 
-    .controls-left,
-    .controls-center,
-    .controls-right {
-        width: 100%;
-        flex-grow: 1;
-        justify-content: flex-start;
-    }
-
-    #tablet-desktop-search {
+    #search-tablet-desktop {
         display: none;
     }
 
@@ -1017,12 +949,6 @@ button:active {
 
     .column {
         min-width: 250px;
-    }
-
-    .board-controls {
-        width: 100%;
-        overflow-x: auto;
-        padding-bottom: var(--space-xs);
     }
 
     .modal-content {
@@ -1039,7 +965,7 @@ button:active {
         max-height: calc((var(--vh, 1vh) * 100) - 195px);
     }
 
-    .mobile-menu-section {
+    .menu-section-mobile {
         margin-bottom: var(--space-md);
         display: flex;
         align-items: center; /* Vertical alignment */
@@ -1047,7 +973,7 @@ button:active {
         flex-direction: column; /* Optional: if you want vertical stacking */
     }
 
-    .mobile-menu-divider {
+    .menu-divider-mobile {
         height: 2px;
         background-color: var(--color-surface-light);
         margin: var(--space-xl) 0;
