@@ -569,7 +569,7 @@ button:active {
 }
 
 /* Form elements */
-#search-tasks {
+.search-input {
     width: 100%;
     background: var(--color-surface-light);
     border: 2px solid var(--color-surface-light);
@@ -580,7 +580,7 @@ button:active {
     height: 40px;
 }
 
-#search-tasks:focus {
+.search-input:focus {
     border-color: var(--color-accent);
     outline: none;
 }
