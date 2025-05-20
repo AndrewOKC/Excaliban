@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const board = document.getElementById("board");
     const columnTemplate = document.getElementById("column-template");
     const taskTemplate = document.getElementById("task-template");
-    const searchInput = document.getElementById("search-tasks");
+    const searchInputMobile = document.getElementById("search-tasks-mobile");
+    const searchInputDesktop = document.getElementById("search-tasks-tablet-desktop");
     const taskEditModal = document.getElementById("task-edit-modal");
     const taskEditForm = document.getElementById("task-edit-form");
     const colorOptions = document.querySelectorAll(".color-option");
@@ -39,15 +40,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Debounce timer for search
     let searchTimer = null;
 
-    // Search : Handle Input
-    searchInput.addEventListener("input", (e) => {
+    // Helper function for search input event handling
+    const handleSearchInput = (e) => {
         // Debounce search
         clearTimeout(searchTimer);
         searchTimer = setTimeout(() => {
             const searchTerm = e.target.value.toLowerCase().trim();
+            
+            // Sync the other search input value
+            if (e.target === searchInputMobile) {
+                searchInputDesktop.value = searchTerm;
+            } else {
+                searchInputMobile.value = searchTerm;
+            }
+            
             TaskManager.searchTasks(searchTerm);
         }, 300);
-    });
+    };
+
+    // Search : Handle Input for both search fields
+    searchInputMobile.addEventListener("input", handleSearchInput);
+    searchInputDesktop.addEventListener("input", handleSearchInput);
 
     // Dropdown Menu Toggle
     menuButton.addEventListener("click", (e) => {
