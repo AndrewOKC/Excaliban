@@ -3,7 +3,7 @@
  */
 
 // Application version and schema version
-export const APP_VERSION = "0.3.0";
+export const APP_VERSION = "0.3.2";
 export const SCHEMA_VERSION = "1.0";
 
 import { initBoards, saveBoard } from "./storage.js";
@@ -46,14 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(searchTimer);
         searchTimer = setTimeout(() => {
             const searchTerm = e.target.value.toLowerCase().trim();
-            
+
             // Sync the other search input value
             if (e.target === searchInputMobile) {
                 searchInputDesktop.value = searchTerm;
             } else {
                 searchInputMobile.value = searchTerm;
             }
-            
+
             TaskManager.searchTasks(searchTerm);
         }, 300);
     };
