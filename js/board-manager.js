@@ -2,7 +2,7 @@
  * Board management functionality for the Excaliban app
  */
 import { saveBoard, getAllBoards } from "./storage.js";
-import { showNotification } from "./utils.js";
+import { showNotification, formatISODateToUS } from "./utils.js";
 
 /**
  * Add a new column to the board
@@ -132,7 +132,7 @@ export function loadBoard(board, currentBoardId, columnTemplate, taskTemplate, b
                 if (typeof task === "object" && task.dueDate) {
                     taskElement.dataset.dueDate = task.dueDate;
                     const dueDateElement = taskNode.querySelector(".task-due-date");
-                    const formattedDate = new Date(task.dueDate).toLocaleDateString();
+                    const formattedDate = formatISODateToUS(task.dueDate);
                     dueDateElement.textContent = formattedDate;
 
                     // Check if date is overdue

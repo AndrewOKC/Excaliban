@@ -55,6 +55,16 @@ export function initViewportHeight() {
 }
 
 /**
+ * Formats an ISO date string to US format without timezone conversion
+ * @param {string} dateString - ISO date string (YYYY-MM-DD)
+ * @returns {string} Formatted date string (MM/DD/YYYY)
+ */
+export function formatISODateToUS(dateString) {
+	const [year, month, day] = dateString.split('-');
+	return `${month}/${day}/${year}`;
+}
+
+/**
  * Gets the user's browser information in a more readable format
  * @returns {Object} Object containing browser name and version
  */

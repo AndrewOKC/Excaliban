@@ -1,7 +1,7 @@
 /**
  * Task management functionality for the Excaliban app
  */
-import { showNotification } from './utils.js';
+import { showNotification, formatISODateToUS } from './utils.js';
 
 let currentTask = null;
 let currentEditTask = null;
@@ -152,7 +152,7 @@ function saveTaskEdit(taskEditModal, saveBoardCallback) {
 	// Update due date display
 	const dueDateElement = currentEditTask.querySelector('.task-due-date');
 	if (editTaskDueDate.value) {
-		const formattedDate = new Date(editTaskDueDate.value).toLocaleDateString();
+		const formattedDate = formatISODateToUS(editTaskDueDate.value);
 		dueDateElement.textContent = formattedDate;
 
 		// Check if date is overdue
