@@ -1,6 +1,6 @@
 // Excaliban Service Worker - Simplified for desktop
 
-const CACHE_VERSION = "0.3.5";
+const CACHE_VERSION = "0.3.6";
 const CACHE_NAME = `excaliban-cache-${CACHE_VERSION}`; // Auto-updates daily
 const urlsToCache = [
     "/",
@@ -62,8 +62,13 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
         fetch(event.request)
             .then((response) => {
-                // Don't cache non-successful responses
-                if (!response || response.status !== 200) {
+                // Check if we received a valid response, and only cache GET requests
+                if (
+                    !response ||
+                    response.status !== 200 ||
+                    response.type !== "basic" ||
+                    event.request.method !== "GET"
+                ) {
                     return response;
                 }
 
