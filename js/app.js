@@ -3,7 +3,7 @@
  */
 
 // Application version and schema version
-export const APP_VERSION = "0.3.6";
+export const APP_VERSION = "0.3.5";
 export const SCHEMA_VERSION = "1.0";
 
 import { initBoards, saveBoard } from "./storage.js";
