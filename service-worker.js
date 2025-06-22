@@ -1,6 +1,6 @@
 // Excaliban Service Worker - Simplified for desktop
 
-const CACHE_VERSION = "0.3.3";
+const CACHE_VERSION = "0.3.4";
 const CACHE_NAME = `excaliban-cache-${CACHE_VERSION}`; // Auto-updates daily
 const urlsToCache = [
     "/",
@@ -14,10 +14,13 @@ const urlsToCache = [
     "/js/task-manager.js",
     "/js/utils.js",
     "/js/feedback.js",
+    "/js/font-manager.js",
     "/manifest.json",
     "/meta/192x192.png",
     "/meta/512x512.png",
     "/fonts/Virgil-Regular.woff2",
+    "/fonts/ComicShanns-Regular.woff2",
+    "/fonts/nunito-sans-latin-400-normal.woff2",
 ];
 
 // Install event - cache assets

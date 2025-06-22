@@ -3,7 +3,7 @@
  */
 
 // Application version and schema version
-export const APP_VERSION = "0.3.3";
+export const APP_VERSION = "0.3.4";
 export const SCHEMA_VERSION = "1.0";
 
 import { initBoards, saveBoard } from "./storage.js";
@@ -13,6 +13,7 @@ import { initViewportHeight } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
 import * as BoardManager from "./board-manager.js";
 import { initFeedback } from "./feedback.js";
+import { initializeFontManager } from "./font-manager.js";
 
 // Wait for DOM to be loaded before initializing feedback
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initServiceWorker();
     initViewportHeight();
     initFeedback();
+    initializeFontManager();
 
     // Current active board
     let currentBoardId = initBoards();

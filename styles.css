@@ -45,6 +45,13 @@
     --shadow-hover: 4px 4px 0px var(--color-accent-shadow-hover);
     --shadow-active: 1px 1px 0px rgba(105, 101, 219, 0.1);
 
+    /* Font families */
+    --font-virgil: 'Virgil', 'Comic Sans MS', cursive;
+    --font-comic: 'ComicShanns', 'Comic Sans MS', cursive;
+    --font-nunito: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-primary: var(--font-virgil); /* Default font */
+    --font-logo: var(--font-virgil); /* Always Virgil for logo */
+
     /* Font sizes */
     --font-small: 0.85rem;
     --font-normal: 1rem;
@@ -64,10 +71,26 @@
     padding: 0;
 }
 
-/* Custom font to mimic Excalidraw's handwritten style */
+/* Font face declarations */
 @font-face {
     font-family: "Virgil";
     src: url("fonts/Virgil-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ComicShanns";
+    src: url("fonts/ComicShanns-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nunito Sans";
+    src: url("fonts/nunito-sans-latin-400-normal.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -78,7 +101,7 @@ html,
 body {
     height: 100%;
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
@@ -131,6 +154,7 @@ h1 {
     font-weight: normal;
     font-size: var(--font-xlarge);
     margin-left: var(--space-xl);
+    font-family: var(--font-logo);
 }
 
 /* Menu Button */
@@ -272,7 +296,7 @@ h1 {
     border: 2px solid var(--color-surface-lighter);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     margin-top: var(--space-xs);
 }
 
@@ -283,7 +307,7 @@ h1 {
     border: 2px solid var(--color-surface-lighter);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     margin-top: var(--space-xs);
 }
 
@@ -483,7 +507,7 @@ button {
     align-items: center;
     height: 40px;
     padding: 0px var(--space-lg);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     font-size: var(--font-normal);
     cursor: pointer;
     color: var(--color-text);
@@ -586,7 +610,7 @@ button:active {
     border: 2px solid var(--color-surface-light);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     padding: var(--space-md);
     height: 40px;
 }
@@ -601,7 +625,7 @@ button:active {
     border: 2px solid var(--color-surface-light);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     padding: 5px var(--space-md);
     height: 40px;
     width: fill-available;
@@ -617,7 +641,7 @@ button:active {
     border: 2px solid var(--color-surface-light);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     padding: 5px var(--space-md);
     height: 40px;
     width: fill-available;
@@ -645,7 +669,7 @@ button:active {
     border: 2px solid var(--color-surface-lighter);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     padding: var(--space-md);
 }
 
@@ -759,7 +783,7 @@ button:active {
     border: 2px solid var(--color-accent);
     border-radius: var(--radius-md);
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     color: var(--color-text);
     z-index: 100;
     animation: fadeIn 0.3s ease-out;
@@ -792,7 +816,7 @@ button:active {
 #feedback-modal textarea {
     resize: vertical;
     min-height: 100px;
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
 }
 
 /* Export Modal */
@@ -809,7 +833,7 @@ button:active {
 
 #export-modal button {
     padding: var(--space-md) var(--space-lg);
-    font-family: "Virgil", "Comic Sans MS", cursive;
+    font-family: var(--font-primary);
     cursor: pointer;
     font-size: var(--font-normal);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -1006,4 +1030,20 @@ button:active {
         margin: var(--space-xl) 0;
         display: block;
     }
+}
+
+/* ==========================================================================
+   6. Font Utility Classes
+   ========================================================================== */
+
+.font-virgil {
+    --font-primary: var(--font-virgil);
+}
+
+.font-comic {
+    --font-primary: var(--font-comic);
+}
+
+.font-nunito {
+    --font-primary: var(--font-nunito);
 }
