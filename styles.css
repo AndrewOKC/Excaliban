@@ -276,6 +276,17 @@ h1 {
     margin-top: var(--space-xs);
 }
 
+.font-select {
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--color-surface-lighter);
+    border: 2px solid var(--color-surface-lighter);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-family: "Virgil", "Comic Sans MS", cursive;
+    margin-top: var(--space-xs);
+}
+
 /* Board layout */
 .board {
     display: flex;
@@ -586,6 +597,22 @@ button:active {
 }
 
 #board-dropdown {
+    background: var(--color-surface-light);
+    border: 2px solid var(--color-surface-light);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-family: "Virgil", "Comic Sans MS", cursive;
+    padding: 5px var(--space-md);
+    height: 40px;
+    width: fill-available;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+}
+
+#font-dropdown {
     background: var(--color-surface-light);
     border: 2px solid var(--color-surface-light);
     border-radius: var(--radius-md);
