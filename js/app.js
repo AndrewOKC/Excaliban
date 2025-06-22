@@ -3,7 +3,7 @@
  */
 
 // Application version and schema version
-export const APP_VERSION = "0.3.4";
+export const APP_VERSION = "0.3.5";
 export const SCHEMA_VERSION = "1.0";
 
 import { initBoards, saveBoard } from "./storage.js";
@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Dropdown Menu Toggle
     menuButton.addEventListener("click", (e) => {
         e.stopPropagation();
+        if (window.umami) umami.track("Open Menu");
         dropdownMenu.classList.toggle("show");
 
         // Toggle menu button appearance (optional - can be hamburger to X animation)

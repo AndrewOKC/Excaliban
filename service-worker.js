@@ -1,6 +1,6 @@
 // Excaliban Service Worker - Simplified for desktop
 
-const CACHE_VERSION = "0.3.4";
+const CACHE_VERSION = "0.3.5";
 const CACHE_NAME = `excaliban-cache-${CACHE_VERSION}`; // Auto-updates daily
 const urlsToCache = [
     "/",

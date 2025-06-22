@@ -5,30 +5,30 @@
 
 // Available fonts configuration
 const AVAILABLE_FONTS = [
-    { id: 'virgil', name: 'Virgil (Default)', variable: '--font-virgil' },
-    { id: 'comic', name: 'Comic Shanns', variable: '--font-comic' },
-    { id: 'nunito', name: 'Nunito Sans', variable: '--font-nunito' }
+    { id: "virgil", name: "Virgil (Default)", variable: "--font-virgil" },
+    { id: "comic", name: "Comic Shanns", variable: "--font-comic" },
+    { id: "nunito", name: "Nunito Sans", variable: "--font-nunito" },
 ];
 
-const STORAGE_KEY = 'selectedFont';
+const STORAGE_KEY = "selectedFont";
 
 /**
  * Populates the font dropdown with available font options
  */
 function populateFontDropdown() {
-    const fontDropdown = document.getElementById('font-dropdown');
-    
+    const fontDropdown = document.getElementById("font-dropdown");
+
     if (!fontDropdown) {
-        console.warn('Font dropdown element not found');
+        console.warn("Font dropdown element not found");
         return;
     }
 
     // Clear existing options
-    fontDropdown.innerHTML = '';
+    fontDropdown.innerHTML = "";
 
     // Add font options
-    AVAILABLE_FONTS.forEach(font => {
-        const option = document.createElement('option');
+    AVAILABLE_FONTS.forEach((font) => {
+        const option = document.createElement("option");
         option.value = font.id;
         option.textContent = font.name;
         fontDropdown.appendChild(option);
@@ -46,19 +46,18 @@ function populateFontDropdown() {
  * @param {string} fontId - The ID of the font to activate
  */
 function changeFontFamily(fontId) {
-    const font = AVAILABLE_FONTS.find(f => f.id === fontId);
-    
+    const font = AVAILABLE_FONTS.find((f) => f.id === fontId);
+
     if (!font) {
         console.warn(`Font with ID "${fontId}" not found`);
         return;
     }
 
     // Get the CSS variable value for the selected font
-    const fontVariable = getComputedStyle(document.documentElement)
-        .getPropertyValue(font.variable);
+    const fontVariable = getComputedStyle(document.documentElement).getPropertyValue(font.variable);
 
     // Update the primary font CSS variable
-    document.documentElement.style.setProperty('--font-primary', fontVariable);
+    document.documentElement.style.setProperty("--font-primary", fontVariable);
 
     // Save the preference
     saveFontSettings(fontId);
@@ -74,7 +73,7 @@ function saveFontSettings(fontId) {
     try {
         localStorage.setItem(STORAGE_KEY, fontId);
     } catch (error) {
-        console.warn('Failed to save font settings:', error);
+        console.warn("Failed to save font settings:", error);
     }
 }
 
@@ -86,7 +85,7 @@ function loadFontSettings() {
     try {
         return localStorage.getItem(STORAGE_KEY);
     } catch (error) {
-        console.warn('Failed to load font settings:', error);
+        console.warn("Failed to load font settings:", error);
         return null;
     }
 }
@@ -105,14 +104,15 @@ function initializeFontManager() {
     }
 
     // Add event listener for font dropdown changes
-    const fontDropdown = document.getElementById('font-dropdown');
+    const fontDropdown = document.getElementById("font-dropdown");
     if (fontDropdown) {
-        fontDropdown.addEventListener('change', (event) => {
+        fontDropdown.addEventListener("change", (event) => {
             changeFontFamily(event.target.value);
+            if (window.umami) umami.track("Change Font", { font: event.target.value });
         });
     }
 
-    console.log('Font manager initialized');
+    console.log("Font manager initialized");
 }
 
 // Export functions for use in other modules
@@ -122,5 +122,5 @@ export {
     saveFontSettings,
     loadFontSettings,
     initializeFontManager,
-    AVAILABLE_FONTS
+    AVAILABLE_FONTS,
 };

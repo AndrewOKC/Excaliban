@@ -46,9 +46,9 @@
     --shadow-active: 1px 1px 0px rgba(105, 101, 219, 0.1);
 
     /* Font families */
-    --font-virgil: 'Virgil', 'Comic Sans MS', cursive;
-    --font-comic: 'ComicShanns', 'Comic Sans MS', cursive;
-    --font-nunito: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-virgil: "Virgil", "Comic Sans MS", cursive;
+    --font-comic: "ComicShanns", "Comic Sans MS", cursive;
+    --font-nunito: "Nunito Sans", -apple-system, BlinkMacSystemFont, sans-serif;
     --font-primary: var(--font-virgil); /* Default font */
     --font-logo: var(--font-virgil); /* Always Virgil for logo */
 
@@ -245,7 +245,7 @@ h1 {
 .menu-divider {
     height: 2px;
     background-color: var(--color-surface-light);
-    margin: var(--space-xl) 0;
+    margin: var(--space-md) 0;
 }
 
 .menu-item {
@@ -1027,7 +1027,7 @@ button:active {
     .menu-divider-mobile {
         height: 2px;
         background-color: var(--color-surface-light);
-        margin: var(--space-xl) 0;
+        margin: var(--space-md) 0;
         display: block;
     }
 }
