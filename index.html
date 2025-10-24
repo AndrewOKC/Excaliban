@@ -32,11 +32,7 @@
         />
         <meta property="twitter:image" content="https://excaliban.com/meta/twitter-image.png" />
 
-        <script
-            defer
-            src="https://umami.emeraldspawn.com/script.js"
-            data-website-id="fdd6a8c3-a768-4953-a94a-034d598cde6c"
-        ></script>
+        <script defer src="https://umami.emeraldspawn.com/script.js" data-website-id="fdd6a8c3-a768-4953-a94a-034d598cde6c"></script>
         <link rel="preload" href="fonts/Virgil-Regular.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -62,10 +58,7 @@
                 },
                 "datePublished": "2025-02-01",
                 "dateModified": "2025-05-19",
-                "screenshot": [
-                    "https://excaliban.com/meta/showcase_mac.png",
-                    "https://excaliban.com/meta/showcase_iphone.png"
-                ],
+                "screenshot": ["https://excaliban.com/meta/showcase_mac.png", "https://excaliban.com/meta/showcase_iphone.png"],
                 "featureList": [
                     "Visual Task Management",
                     "Drag and Drop Interface",
@@ -77,15 +70,7 @@
                     "No Account Required"
                 ],
                 "softwareRequirements": "Web browser with JavaScript enabled",
-                "keywords": [
-                    "Kanban",
-                    "Kanban Board",
-                    "Project Management",
-                    "Task Management",
-                    "Online Kanban",
-                    "Free Kanban",
-                    "Handwritten Kanban"
-                ],
+                "keywords": ["Kanban", "Kanban Board", "Project Management", "Task Management", "Online Kanban", "Free Kanban", "Handwritten Kanban"],
                 "isFamilyFriendly": true,
                 "offers": {
                     "@type": "Offer",
@@ -100,24 +85,21 @@
         <div class="app-container">
             <header>
                 <div class="header-left">
+                    <!-- Menu Button -->
                     <button id="menu-button" class="menu-button" aria-label="Open menu">
                         <span class="menu-line"></span>
                         <span class="menu-line"></span>
                         <span class="menu-line"></span>
                     </button>
+
+                    <!-- Logo -->
                     <h1>Excaliban</h1>
 
                     <!-- Dropdown Menu -->
                     <div id="dropdown-menu" class="dropdown-menu">
                         <div class="menu-section-mobile">
                             <div id="search-mobile" class="search-container">
-                                <input
-                                    type="text"
-                                    id="search-tasks-mobile"
-                                    class="search-input"
-                                    placeholder="Search..."
-                                    aria-label="Search tasks"
-                                />
+                                <input type="text" id="search-tasks-mobile" class="search-input" placeholder="Search..." aria-label="Search tasks" />
                             </div>
                         </div>
                         <div class="menu-divider-mobile"></div>
@@ -132,26 +114,11 @@
                                 <div class="board-icons">
                                     <span id="menu-new-board" title="Create new board" aria-label="Create new board">
                                         <svg width="18" height="18" viewBox="0 0 18 18">
-                                            <path
-                                                d="M9 2v14M2 9h14"
-                                                stroke="white"
-                                                stroke-width="3.2"
-                                                stroke-linecap="round"
-                                            />
+                                            <path d="M9 2v14M2 9h14" stroke="white" stroke-width="3.2" stroke-linecap="round" />
                                         </svg>
                                     </span>
-                                    <span
-                                        id="menu-rename-board"
-                                        title="Rename current board"
-                                        aria-label="Rename current board"
-                                        >✏️</span
-                                    >
-                                    <span
-                                        id="menu-delete-board"
-                                        title="Delete current board"
-                                        aria-label="Delete current board"
-                                        >🗑️</span
-                                    >
+                                    <span id="menu-rename-board" title="Rename current board" aria-label="Rename current board">✏️</span>
+                                    <span id="menu-delete-board" title="Delete current board" aria-label="Delete current board">🗑️</span>
                                 </div>
                             </div>
                             <select id="board-dropdown" class="menu-board-select" aria-label="Select board"></select>
@@ -173,13 +140,7 @@
                 </div>
                 <div class="header-right">
                     <div id="search-tablet-desktop" class="search-container">
-                        <input
-                            type="text"
-                            id="search-tasks-tablet-desktop"
-                            class="search-input"
-                            placeholder="Search..."
-                            aria-label="Search tasks"
-                        />
+                        <input type="text" id="search-tasks-tablet-desktop" class="search-input" placeholder="Search..." aria-label="Search tasks" />
                     </div>
                     <button id="add-column" aria-label="Add column">Add Column</button>
                     <button id="clear-board" aria-label="Clear board">Clear</button>
@@ -191,12 +152,11 @@
                         </svg>
                     </button>
                 </div>
-                <div id="notification" class="notification" role="alert"></div>
             </header>
-
             <main id="board" class="board">
                 <!-- Columns will be added here dynamically -->
             </main>
+            <div id="notification" class="notification" role="alert"></div>
         </div>
 
         <!-- Templates -->
