@@ -93,7 +93,7 @@ function loadFontSettings() {
 /**
  * Initializes the font management system
  */
-function initializeFontManager() {
+function initFontManager() {
     // Populate the dropdown
     populateFontDropdown();
 
@@ -116,11 +116,4 @@ function initializeFontManager() {
 }
 
 // Export functions for use in other modules
-export {
-    populateFontDropdown,
-    changeFontFamily,
-    saveFontSettings,
-    loadFontSettings,
-    initializeFontManager,
-    AVAILABLE_FONTS,
-};
+export { populateFontDropdown, changeFontFamily, saveFontSettings, loadFontSettings, initFontManager, AVAILABLE_FONTS };

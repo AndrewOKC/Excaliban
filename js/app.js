@@ -13,7 +13,7 @@ import { initViewportHeight } from "./utils.js";
 import * as TaskManager from "./task-manager.js";
 import * as BoardManager from "./board-manager.js";
 import { initFeedback } from "./feedback.js";
-import { initializeFontManager } from "./font-manager.js";
+import { initFontManager } from "./font-manager.js";
 
 // Wait for DOM to be loaded before initializing feedback
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initServiceWorker();
     initViewportHeight();
     initFeedback();
-    initializeFontManager();
+    initFontManager();
 
     // Current active board
     let currentBoardId = initBoards();
