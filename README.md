@@ -51,7 +51,7 @@ The app hosted at [excaliban.com](https://excaliban.com) is a minimal showcase. 
 
 ## Mobile Support
 
-The application has already gone through some mobile optimizations. More optimizations are planned! Consider joining the [Discord Server](https://discord.gg/22SPJduh), and sending us suggestions on how we should continue optimizing.
+The application has already gone through some mobile optimizations. More optimizations are planned!
 
 <div align="left">
   <figure>
